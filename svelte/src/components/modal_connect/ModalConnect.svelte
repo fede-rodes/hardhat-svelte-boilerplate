@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ethers } from "ethers";
+  import { connexion } from "../../stores/connection";
   import metamaskIcon from "../../assets/metamask.svg";
   import coinbaseIcon from "../../assets/coinbase.svg";
   import operaWalletIcon from "../../assets/opera_wallet.svg";
@@ -7,7 +7,6 @@
   import formaticIcon from "../../assets/formatic.svg";
   import { Modal } from "../modal";
 
-  // Wallets
   const WALLETS = [
     { name: "MetaMask", icon: metamaskIcon, class: "h-4" },
     { name: "Coinbase Wallet", icon: coinbaseIcon, class: "h-5" },
@@ -15,49 +14,7 @@
     { name: "WalletConnect", icon: walletConnectIcon, class: "h-5" },
     { name: "Formatic", icon: formaticIcon, class: "h-4" },
   ];
-
-  let account;
-  let connectWalletError;
-  let walletConnected = false;
-
-  async function connectWallet() {
-    walletConnected = false;
-    const { ethereum } = window;
-    console.log("ethereum: ", ethereum);
-    console.log("Connecting wallet");
-    await ethereum
-      .request({ method: "eth_requestAccounts" })
-      .then((accountList) => {
-        const [firstAccount] = accountList;
-        account = firstAccount;
-        walletConnected = true;
-        console.log("wallet connected");
-        console.log(account);
-      })
-      .catch((error) => {
-        walletConnected = false;
-        connectWalletError = error;
-        console.log("error connecting wallet");
-      });
-  }
 </script>
-
-<!-- <div class="walletButtonGroup justifyCenter">
-  {#if walletConnected}
-    <div>
-      <span class="dotConnected" />
-      Connected Account: {account}
-    </div>
-  {:else}
-    <button class="button buttonMetaMask" on:click={connectWallet}>
-      Connect MetaMask
-    </button>
-  {/if}
-
-  <div class="network">
-    After connecting MetaMask, please switch to Ropsten TestNet.
-  </div>
-</div> -->
 
 <Modal id="crypto-modal" on:close {...$$props}>
   <svelte:fragment slot="header">
@@ -74,9 +31,10 @@
     <ul class="my-4 space-y-3">
       {#each WALLETS as wallet}
         <li>
-          <a
-            href="#"
+          <button
+            type="button"
             class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white"
+            on:click={connexion.connect}
           >
             <img
               src={wallet.icon}
@@ -84,7 +42,7 @@
               alt={`${wallet.name} icon`}
             />
             <span class="flex-1 ml-3 whitespace-nowrap">{wallet.name}</span>
-          </a>
+          </button>
         </li>
       {/each}
     </ul>

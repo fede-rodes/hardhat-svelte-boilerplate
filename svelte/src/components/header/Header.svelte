@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import { connexion } from "../../stores/connection";
   import svelteLogo from "../../assets/svelte.svg";
   import { Button } from "../button";
 
@@ -22,14 +23,18 @@
         Brand
       </span>
     </a>
-    <Button
-      type="button"
-      size="md"
-      data-modal-target="crypto-modal"
-      data-modal-toggle="crypto-modal"
-      on:click={handleConnect}
-    >
-      Connect wallet
-    </Button>
+    {#if $connexion.connected}
+      {$connexion.account}
+    {:else}
+      <Button
+        type="button"
+        size="md"
+        data-modal-target="crypto-modal"
+        data-modal-toggle="crypto-modal"
+        on:click={handleConnect}
+      >
+        Connect wallet
+      </Button>
+    {/if}
   </div>
 </nav>

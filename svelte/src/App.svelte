@@ -3,10 +3,10 @@
   import { Header } from "./components/header";
   import { ModalConnect } from "./components/modal_connect";
 
-  /** Connect modal state */
+  /** ModalConnect state */
   let isOpen = false;
 
-  function handleConnect() {
+  function handleOpen() {
     isOpen = true;
   }
   function handleClose() {
@@ -14,7 +14,7 @@
   }
 </script>
 
-<Header on:connect={handleConnect} />
+<Header on:connect={handleOpen} />
 
 <main>
   <ModalConnect {isOpen} on:close={handleClose} />
