@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { connexion } from "../../stores/connection";
+  import { connexion } from "../../stores/connexion";
   import metamaskIcon from "../../assets/metamask.svg";
   import coinbaseIcon from "../../assets/coinbase.svg";
   import operaWalletIcon from "../../assets/opera_wallet.svg";
@@ -68,5 +68,6 @@
         Why do I need to connect with my wallet?</a
       >
     </div> -->
+    <!-- TODO: display connexion error -->
   </svelte:fragment>
 </Modal>

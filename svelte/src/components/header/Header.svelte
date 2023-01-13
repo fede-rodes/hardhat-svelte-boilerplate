@@ -1,7 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { connexion } from "../../stores/connection";
+  import { connexion } from "../../stores/connexion";
   import svelteLogo from "../../assets/svelte.svg";
+  import { shortenAddress } from "../../utils/shorten-address";
   import { Button } from "../button";
 
   const dispatch = createEventDispatcher();
@@ -24,7 +25,7 @@
       </span>
     </a>
     {#if $connexion.connected}
-      {$connexion.account}
+      {shortenAddress($connexion.account)}
     {:else}
       <Button
         type="button"
