@@ -1,6 +1,6 @@
 <script lang="ts">
   import "./app.css";
-  import { connexion } from "./stores/connexion";
+  import { metamask } from "./stores/metamask";
   import { Header } from "./components/header";
   import { ModalConnect } from "./components/modal-connect";
 
@@ -15,13 +15,12 @@
   }
 
   $: {
-    if ($connexion.connected) {
+    if ($metamask.isConnected) {
       handleClose();
     }
   }
 </script>
 
-<!-- TODO: change name to open-modal -->
 <Header on:connect={handleOpen} />
 
 <main>
