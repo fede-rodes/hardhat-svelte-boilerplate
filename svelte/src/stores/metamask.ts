@@ -1,19 +1,16 @@
 import { writable } from "svelte/store";
-import type { Address } from "../globals";
 
-// TODO: change name to metamask
 export type Connexion = {
   account: Address | undefined;
-  connected: boolean;
+  isConnected: boolean;
   error: any;
   loading: boolean;
 };
 
-// TODO: createStore
-function createConnexion() {
+function createStore() {
   const { subscribe, set, update } = writable<Connexion>({
     account: undefined,
-    connected: false,
+    isConnected: false,
     error: undefined,
     loading: false,
   });
@@ -36,7 +33,7 @@ function createConnexion() {
           method: "eth_requestAccounts",
         })) as Address[];
 
-        if (accounts == null || accounts.length === 0) {
+        if (accounts.length === 0) {
           update((c) => ({
             ...c,
             error: new Error("No account found"),
@@ -46,14 +43,14 @@ function createConnexion() {
 
         set({
           account: accounts[0],
-          connected: true,
+          isConnected: true,
           error: undefined,
           loading: false,
         });
       } catch (error) {
         set({
           account: undefined,
-          connected: false,
+          isConnected: false,
           error,
           loading: false,
         });
@@ -62,7 +59,7 @@ function createConnexion() {
     disconnect: () => {
       set({
         account: undefined,
-        connected: false,
+        isConnected: false,
         error: undefined,
         loading: false,
       });
@@ -70,11 +67,20 @@ function createConnexion() {
   };
 }
 
-export const connexion = createConnexion();
+export const metamask = createStore();
 
-// TODO
-// Runs whenever the user changes account state
-// window.ethereum.on('accountsChanged', async () => {
-//     initialise();
-// });
-// Source: https://stackoverflow.com/questions/67856902/how-to-logout-of-metamask-account-using-web3-js
+if (window.ethereum != null) {
+  // Connect account on landing or reload
+  // const accounts = (await window.ethereum.request({
+  //   method: "eth_requestAccounts",
+  // })) as Address[];
+
+  // if (accounts.length > 0) {
+  //   metamask.connect();
+  // }
+
+  // Disconnect on accounts changed
+  window.ethereum.on("accountsChanged", async () => {
+    metamask.disconnect();
+  });
+}

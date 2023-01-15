@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { connexion } from "../../stores/connexion";
+  import { metamask } from "../../stores/metamask";
   import metamaskIcon from "../../assets/metamask.svg";
   import coinbaseIcon from "../../assets/coinbase.svg";
   import operaWalletIcon from "../../assets/opera_wallet.svg";
@@ -16,7 +16,7 @@
   ];
 </script>
 
-<Modal id="crypto-modal" on:close {...$$props}>
+<Modal on:close {...$$props}>
   <svelte:fragment slot="header">
     <h3
       class="text-base font-semibold text-gray-900 lg:text-xl dark:text-white"
@@ -34,7 +34,7 @@
           <button
             type="button"
             class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white"
-            on:click={connexion.connect}
+            on:click={metamask.connect}
           >
             <img
               src={wallet.icon}

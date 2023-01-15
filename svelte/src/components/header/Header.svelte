@@ -1,13 +1,13 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { connexion } from "../../stores/connexion";
-  import svelteLogo from "../../assets/svelte.svg";
+  import { metamask } from "../../stores/metamask";
   import { shortenAddress } from "../../utils/shorten-address";
+  import svelteLogo from "../../assets/svelte.svg";
   import { Button } from "../button";
 
   const dispatch = createEventDispatcher();
 
-  function handleConnect() {
+  function handleClick() {
     dispatch("connect");
   }
 </script>
@@ -19,21 +19,15 @@
     <a href="/" class="flex items-center">
       <img src={svelteLogo} class="h-6 mr-3 sm:h-9" alt="Svelte Logo" />
       <span
-        class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
+        class="self-center text-xl font-semibold whitespace-nowrap text-black dark:text-white hidden sm:block"
       >
         Brand
       </span>
     </a>
-    {#if $connexion.connected}
-      {shortenAddress($connexion.account)}
+    {#if $metamask.account != null}
+      {shortenAddress($metamask.account)}
     {:else}
-      <Button
-        type="button"
-        size="md"
-        data-modal-target="crypto-modal"
-        data-modal-toggle="crypto-modal"
-        on:click={handleConnect}
-      >
+      <Button type="button" size="md" on:click={handleClick}>
         Connect wallet
       </Button>
     {/if}

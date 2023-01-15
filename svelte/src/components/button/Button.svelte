@@ -1,4 +1,10 @@
 <script lang="ts">
+  import type { HTMLButtonAttributes } from "svelte/elements";
+
+  type $$Props = HTMLButtonAttributes & {
+    size: "sm" | "md" | "lg";
+  };
+
   export let size: "sm" | "md" | "lg";
 </script>
 
