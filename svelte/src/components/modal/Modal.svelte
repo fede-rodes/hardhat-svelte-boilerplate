@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import { clickOutsideDialog } from "$actions/click-outside-dialog";
   import closeIcon from "$assets/close.svg";
-  // import { clickOutside } from "../../actions/click_outside";
 
   export let isOpen = false;
 
@@ -28,13 +28,14 @@
   }
 </script>
 
-<!-- Main modal -->
 <dialog
   bind:this={dialog}
-  class="p-0 backdrop:bg-gray-400 backdrop:bg-opacity-50"
+  use:clickOutsideDialog
+  class="p-0"
   on:keydown={handleKeyDown}
+  on:outclick={handleClose}
 >
-  <!-- Modal content -->
+  <!-- Content -->
   <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
     <button
       type="button"
@@ -44,16 +45,13 @@
       <img src={closeIcon} class="w-5 h-5" alt="Close icon" />
       <span class="sr-only">Close modal</span>
     </button>
-    <!-- Modal header -->
+    <!-- Header -->
     <div class="px-6 py-4 border-b rounded-t dark:border-gray-600">
       <slot name="header" />
     </div>
-    <!-- Modal body -->
+    <!-- Body -->
     <div class="p-6">
       <slot name="body" />
     </div>
   </div>
 </dialog>
-
-<!-- use:clickOutside
-  on:outclick={handleClose} -->
