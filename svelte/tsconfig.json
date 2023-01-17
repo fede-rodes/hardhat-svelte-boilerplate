@@ -17,5 +17,14 @@
     "strict": true
   },
   "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "baseUrl": "./",
+  "paths": {
+    "$actions/*": ["src/actions/*"],
+    "$assets/*": ["src/assets/*"],
+    "$components/*": ["src/components/*"],
+    "$stores/*": ["src/stores/*"],
+    "$types/*": ["src/types/*"],
+    "$utils/*": ["src/utils/*"]
+  }
 }

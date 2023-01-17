@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import closeIcon from "../../assets/close.svg";
+  import closeIcon from "$assets/close.svg";
   // import { clickOutside } from "../../actions/click_outside";
 
   export let isOpen = false;
