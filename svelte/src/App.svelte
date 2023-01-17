@@ -1,8 +1,8 @@
 <script lang="ts">
   import "./app.css";
-  import { metamask } from "./stores/metamask";
-  import { Header } from "./components/header";
-  import { ModalConnect } from "./components/modal-connect";
+  import { metamask } from "$stores/metamask";
+  import { Header } from "$components/header";
+  import { ModalConnect } from "$components/modal-connect";
 
   /** ModalConnect state */
   let isOpen = false;

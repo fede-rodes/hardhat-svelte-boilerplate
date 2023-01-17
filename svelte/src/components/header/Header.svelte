@@ -1,9 +1,9 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { metamask } from "../../stores/metamask";
-  import { shortenAddress } from "../../utils/shorten-address";
-  import svelteLogo from "../../assets/svelte.svg";
-  import { Button } from "../button";
+  import { metamask } from "$stores/metamask";
+  import { shortenAddress } from "$utils/shorten-address";
+  import svelteLogo from "$assets/svelte.svg";
+  import { Button } from "$components/button";
 
   const dispatch = createEventDispatcher();
 
@@ -24,6 +24,7 @@
         Brand
       </span>
     </a>
+
     {#if $metamask.account != null}
       {shortenAddress($metamask.account)}
     {:else}

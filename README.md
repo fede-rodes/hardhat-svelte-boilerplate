@@ -32,6 +32,10 @@ cd into `hardhat` folder and run `npm init vite` selecting the `svelte` option.
 
 [https://tailwindcss.com/docs/guides/sveltekit](https://tailwindcss.com/docs/guides/sveltekit)
 
+## tailwindCSS Components
+
+[https://flowbite.com](https://flowbite.com)
+
 ## Connect with Metamask
 
 [https://github.com/matiasfha/getting-started-fullstack-ethereum-development/tree/lesson09](https://github.com/matiasfha/getting-started-fullstack-ethereum-development/tree/lesson09)
