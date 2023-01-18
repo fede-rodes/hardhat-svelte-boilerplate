@@ -14,24 +14,23 @@
 </script>
 
 <nav
-  class="bg-white px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600"
+  class="
+    fixed top-0 left-0 h-16 w-full z-20
+  bg-white border-b border-gray-200
+  dark:bg-gray-900 dark:border-gray-600
+    px-2 sm:px-4 py-2.5
+    flex flex-wrap items-center justify-between
+  "
 >
-  <div class="flex flex-wrap items-center justify-between">
-    <a href="/" class="flex items-center">
-      <img src={svelteLogo} class="h-6 mr-3 sm:h-9" alt="Svelte Logo" />
-      <span
-        class="self-center text-xl font-semibold whitespace-nowrap text-black dark:text-white hidden sm:block"
-      >
-        Brand
-      </span>
-    </a>
+  <a href="/">
+    <img src={svelteLogo} class="h-6 sm:h-9" alt="Svelte Logo" />
+  </a>
 
-    {#if account != null}
-      {shortenAddress(account)}
-    {:else}
-      <Button type="button" size="md" on:click={handleClick}>
-        Connect wallet
-      </Button>
-    {/if}
-  </div>
+  {#if account != null}
+    {shortenAddress(account)}
+  {:else}
+    <Button type="button" size="md" on:click={handleClick}>
+      Connect wallet
+    </Button>
+  {/if}
 </nav>
