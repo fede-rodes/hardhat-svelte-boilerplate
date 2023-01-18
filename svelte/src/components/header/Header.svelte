@@ -1,9 +1,10 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { metamask } from "$stores/metamask";
   import { shortenAddress } from "$utils/shorten-address";
   import svelteLogo from "$assets/svelte.svg";
   import { Button } from "$components/button";
+
+  export let account: Address | undefined;
 
   const dispatch = createEventDispatcher();
 
@@ -25,8 +26,8 @@
       </span>
     </a>
 
-    {#if $metamask.account != null}
-      {shortenAddress($metamask.account)}
+    {#if account != null}
+      {shortenAddress(account)}
     {:else}
       <Button type="button" size="md" on:click={handleClick}>
         Connect wallet

@@ -21,7 +21,7 @@
   }
 </script>
 
-<Header on:connect={handleOpen} />
+<Header account={$metamask.account} on:connect={handleOpen} />
 
 <main>
   <ModalConnect {isOpen} on:close={handleClose} />
