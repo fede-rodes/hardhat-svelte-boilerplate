@@ -8,8 +8,8 @@
 
   const dispatch = createEventDispatcher();
 
-  function handleClick() {
-    dispatch("connect");
+  function handleLogin() {
+    dispatch("login");
   }
 </script>
 
@@ -29,7 +29,7 @@
   {#if account != null}
     {shortenAddress(account)}
   {:else}
-    <Button type="button" size="md" on:click={handleClick}>
+    <Button type="button" size="md" on:click={handleLogin}>
       Connect wallet
     </Button>
   {/if}

@@ -4,7 +4,6 @@
   import { Header } from "$components/header";
   import { ModalConnect } from "$components/modal-connect";
 
-  /** ModalConnect state */
   let isOpen = false;
 
   function handleOpen() {
@@ -21,7 +20,7 @@
   }
 </script>
 
-<Header account={$metamask.account} on:connect={handleOpen} />
+<Header account={$metamask.account} on:login={handleOpen} />
 
 <main>
   <ModalConnect {isOpen} on:close={handleClose} />

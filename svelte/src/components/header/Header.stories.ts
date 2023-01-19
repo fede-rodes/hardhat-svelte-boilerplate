@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 
 export const LoggedIn: Story = {
   args: {
-    account: `0x${[...new Array(40)].fill(0).join("")}`,
+    account: `0x${new Array(40).fill(0).join("")}`,
   },
 };
 
