@@ -1,11 +1,9 @@
-<script lang="ts">
-  import { metamask } from "$stores/metamask";
+<script lang="ts" context="module">
   import metamaskIcon from "$assets/metamask.svg";
   import coinbaseIcon from "$assets/coinbase.svg";
   import operaWalletIcon from "$assets/opera_wallet.svg";
   import walletConnectIcon from "$assets/wallet_connect.svg";
   import formaticIcon from "$assets/formatic.svg";
-  import { Modal } from "$components/modal";
 
   const WALLETS = [
     { name: "MetaMask", icon: metamaskIcon, class: "h-4" },
@@ -14,6 +12,11 @@
     { name: "WalletConnect", icon: walletConnectIcon, class: "h-5" },
     { name: "Formatic", icon: formaticIcon, class: "h-4" },
   ];
+</script>
+
+<script lang="ts">
+  import { metamask } from "$stores/metamask";
+  import { Modal } from "$components/modal";
 </script>
 
 <Modal on:close {...$$props}>

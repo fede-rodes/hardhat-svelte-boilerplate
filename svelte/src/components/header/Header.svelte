@@ -29,7 +29,13 @@
   {#if account != null}
     {shortenAddress(account)}
   {:else}
-    <Button type="button" size="md" on:click={handleLogin}>
+    <Button
+      type="button"
+      intent="primary"
+      size="small"
+      fullWidth={false}
+      on:click={handleLogin}
+    >
       Connect wallet
     </Button>
   {/if}
