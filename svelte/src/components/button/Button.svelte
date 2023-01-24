@@ -42,7 +42,9 @@
 </script>
 
 <button
+  type="button"
   class={buttonVariants({ intent, size, fullWidth, disabled })}
+  {disabled}
   on:click
   {...$$restProps}
 >

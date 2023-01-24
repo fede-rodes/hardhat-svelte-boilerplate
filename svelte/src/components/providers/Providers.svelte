@@ -5,48 +5,48 @@
   import walletConnectIcon from "$assets/wallet_connect.svg";
   import formaticIcon from "$assets/formatic.svg";
 
-  const WALLETS = [
-    { name: "MetaMask", icon: metamaskIcon, class: "h-4" },
-    { name: "Coinbase Wallet", icon: coinbaseIcon, class: "h-5" },
-    { name: "Opera Wallet", icon: operaWalletIcon, class: "h-5" },
-    { name: "WalletConnect", icon: walletConnectIcon, class: "h-5" },
-    { name: "Formatic", icon: formaticIcon, class: "h-4" },
+  export const PROVIDERS = [
+    { name: "MetaMask", icon: metamaskIcon, klass: "h-4" },
+    { name: "Coinbase Wallet", icon: coinbaseIcon, klass: "h-5" },
+    { name: "Opera Wallet", icon: operaWalletIcon, klass: "h-5" },
+    { name: "WalletConnect", icon: walletConnectIcon, klass: "h-5" },
+    { name: "Formatic", icon: formaticIcon, klass: "h-4" },
   ];
 </script>
 
 <script lang="ts">
-  import { metamask } from "$stores/metamask";
-  import { Modal } from "$components/modal";
+  import { createEventDispatcher } from "svelte";
   import { Button } from "$components/button";
+
+  const dispatch = createEventDispatcher();
+
+  // TODO: use providerId or something
+  function handleClick(provider: string) {
+    dispatch("connect", {
+      provider,
+    });
+  }
 </script>
 
-<Modal on:close {...$$props}>
-  <svelte:fragment slot="header">
-    <h3
-      class="text-base font-semibold text-gray-900 lg:text-xl dark:text-white"
-    >
-      Connect wallet
-    </h3>
-  </svelte:fragment>
-  <svelte:fragment slot="body">
-    <p class="text-sm font-normal text-gray-500 dark:text-gray-400">
-      Connect with one of our available wallet providers or create a new one.
-    </p>
-    <ul class="my-4 space-y-3">
-      {#each WALLETS as wallet}
-        <li>
-          <Button type="button" fullWidth on:click={metamask.connect}>
-            <img
-              src={wallet.icon}
-              class={wallet.class}
-              alt={`${wallet.name} icon`}
-            />
-            <span class="flex-1 ml-3 whitespace-nowrap">{wallet.name}</span>
-          </Button>
-        </li>
-      {/each}
-    </ul>
-    <!-- <div>
+<p class="text-sm font-normal text-gray-500 dark:text-gray-400">
+  Connect with one of our available wallet providers or create a new one.
+</p>
+<ul class="my-4 space-y-3">
+  {#each PROVIDERS as { name, icon, klass }}
+    <li>
+      <Button
+        fullWidth
+        on:click={() => {
+          handleClick(name);
+        }}
+      >
+        <img src={icon} class={klass} alt={`${name} icon`} />
+        <span class="flex-1 ml-3 whitespace-nowrap">{name}</span>
+      </Button>
+    </li>
+  {/each}
+</ul>
+<!-- <div>
       <a
         href="#"
         class="inline-flex items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-400"
@@ -68,6 +68,4 @@
         Why do I need to connect with my wallet?</a
       >
     </div> -->
-    <!-- TODO: display connexion error -->
-  </svelte:fragment>
-</Modal>
+<!-- TODO: display connexion error -->
