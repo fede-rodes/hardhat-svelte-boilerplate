@@ -3,16 +3,17 @@
   import type { VariantProps } from "class-variance-authority";
   import { cva } from "class-variance-authority";
 
-  type ButtonVariantProps = Required<VariantProps<typeof buttonVariants>>;
+  type ButtonVariantProps = VariantProps<typeof buttonVariants>;
 
-  export let intent: ButtonVariantProps["intent"];
-  export let size: ButtonVariantProps["size"];
-  export let fullWidth: ButtonVariantProps["fullWidth"];
+  export let intent: ButtonVariantProps["intent"] = "primary";
+  export let size: ButtonVariantProps["size"] = "medium";
+  export let fullWidth: ButtonVariantProps["fullWidth"] = false;
+  export let disabled: ButtonVariantProps["disabled"] = false;
 
   type $$Props = HTMLButtonAttributes & ButtonVariantProps;
 
   const buttonVariants = cva(
-    ["flex", "items-center", "font-bold", "rounded-lg", "hover:shadow"],
+    ["flex", "items-center", "font-bold", "rounded-lg"],
     {
       variants: {
         intent: {
@@ -29,21 +30,19 @@
           small: ["text-sm", "p2"],
           medium: ["text-base", "p3"],
         },
-        // disabled
         fullWidth: {
           true: ["w-full"],
         },
-      },
-      defaultVariants: {
-        intent: "primary",
-        size: "medium",
+        disabled: {
+          true: ["cursor-not-allowed", "bg-gray-100", "dark:bg-gray-500"],
+        },
       },
     }
   );
 </script>
 
 <button
-  class={buttonVariants({ intent, size, fullWidth })}
+  class={buttonVariants({ intent, size, fullWidth, disabled })}
   on:click
   {...$$restProps}
 >

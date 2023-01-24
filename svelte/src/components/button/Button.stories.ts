@@ -48,3 +48,13 @@ export const FullWidth: Story = {
     fullWidth: true,
   },
 };
+
+export const Disabled: Story = {
+  render: (args) => ({
+    Component: ButtonStory,
+    props: args,
+  }),
+  args: {
+    disabled: true,
+  },
+};

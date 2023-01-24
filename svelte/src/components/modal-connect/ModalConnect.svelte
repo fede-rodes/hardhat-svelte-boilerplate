@@ -17,6 +17,7 @@
 <script lang="ts">
   import { metamask } from "$stores/metamask";
   import { Modal } from "$components/modal";
+  import { Button } from "$components/button";
 </script>
 
 <Modal on:close {...$$props}>
@@ -34,18 +35,14 @@
     <ul class="my-4 space-y-3">
       {#each WALLETS as wallet}
         <li>
-          <button
-            type="button"
-            class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white"
-            on:click={metamask.connect}
-          >
+          <Button type="button" fullWidth on:click={metamask.connect}>
             <img
               src={wallet.icon}
               class={wallet.class}
               alt={`${wallet.name} icon`}
             />
             <span class="flex-1 ml-3 whitespace-nowrap">{wallet.name}</span>
-          </button>
+          </Button>
         </li>
       {/each}
     </ul>
