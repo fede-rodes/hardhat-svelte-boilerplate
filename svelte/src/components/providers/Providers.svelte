@@ -75,4 +75,3 @@
         Why do I need to connect with my wallet?</a
       >
     </div> -->
-<!-- TODO: display connexion error -->
