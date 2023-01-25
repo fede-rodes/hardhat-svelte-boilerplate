@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/svelte";
 import { Header } from ".";
 
 const meta = {
-  title: "common/Header",
+  title: "components/Header",
   component: Header,
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/7.0/react/writing-docs/docs-page
   tags: ["autodocs"],

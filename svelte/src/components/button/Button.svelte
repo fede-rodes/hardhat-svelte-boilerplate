@@ -1,19 +1,52 @@
 <script lang="ts">
   import type { HTMLButtonAttributes } from "svelte/elements";
+  import type { VariantProps } from "class-variance-authority";
+  import { cva } from "class-variance-authority";
 
-  type $$Props = HTMLButtonAttributes & {
-    size: "sm" | "md" | "lg";
-  };
+  type ButtonVariantProps = VariantProps<typeof buttonVariants>;
 
-  export let size: "sm" | "md" | "lg";
+  export let intent: ButtonVariantProps["intent"] = "primary";
+  export let size: ButtonVariantProps["size"] = "medium";
+  export let fullWidth: ButtonVariantProps["fullWidth"] = false;
+  export let disabled: ButtonVariantProps["disabled"] = false;
+
+  type $$Props = HTMLButtonAttributes & ButtonVariantProps;
+
+  const buttonVariants = cva(
+    ["flex", "items-center", "font-bold", "rounded-lg"],
+    {
+      variants: {
+        intent: {
+          primary: [
+            "text-gray-900",
+            "bg-gray-100",
+            "hover:bg-gray-200",
+            "dark:bg-gray-600",
+            "dark:hover:bg-gray-500",
+            "dark:text-white",
+          ],
+        },
+        size: {
+          small: ["text-sm", "py-2", "px-3"],
+          medium: ["text-base", "py-3", "px-4"],
+        },
+        fullWidth: {
+          true: ["w-full"],
+        },
+        disabled: {
+          true: ["cursor-not-allowed", "bg-gray-100", "dark:bg-gray-500"],
+        },
+      },
+    }
+  );
 </script>
 
-{#if size === "md"}
-  <button
-    class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700"
-    on:click
-    {...$$props}
-  >
-    <slot />
-  </button>
-{/if}
+<button
+  type="button"
+  class={buttonVariants({ intent, size, fullWidth, disabled })}
+  {disabled}
+  on:click
+  {...$$restProps}
+>
+  <slot />
+</button>

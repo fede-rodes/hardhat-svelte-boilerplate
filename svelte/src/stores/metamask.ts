@@ -3,10 +3,11 @@ import { writable } from "svelte/store";
 export type Connexion = {
   account: Address | undefined;
   isConnected: boolean;
-  error: any;
+  error: Error | undefined;
   loading: boolean;
 };
 
+// TODO: read MetaMask docs https://docs.metamask.io/guide/ethereum-provider.html#using-the-provider
 function createStore() {
   const { subscribe, set, update } = writable<Connexion>({
     account: undefined,
@@ -22,7 +23,7 @@ function createStore() {
         if (window.ethereum == null) {
           update((c) => ({
             ...c,
-            error: new Error("MetaMask is not installed"),
+            error: new Error("MetaMask is not installed."),
           }));
           return;
         }
@@ -36,7 +37,7 @@ function createStore() {
         if (accounts.length === 0) {
           update((c) => ({
             ...c,
-            error: new Error("No account found"),
+            error: new Error("No account found."),
           }));
           return;
         }
@@ -47,11 +48,11 @@ function createStore() {
           error: undefined,
           loading: false,
         });
-      } catch (error) {
+      } catch (error: unknown) {
         set({
           account: undefined,
           isConnected: false,
-          error,
+          error: new Error("Something went wrong."),
           loading: false,
         });
       }

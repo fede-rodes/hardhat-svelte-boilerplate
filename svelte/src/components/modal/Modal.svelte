@@ -47,7 +47,11 @@
     </button>
     <!-- Header -->
     <div class="px-6 py-4 border-b rounded-t dark:border-gray-600">
-      <slot name="header" />
+      <h3
+        class="text-base font-semibold text-gray-900 lg:text-xl dark:text-white"
+      >
+        <slot name="header" />
+      </h3>
     </div>
     <!-- Body -->
     <div class="p-6">
