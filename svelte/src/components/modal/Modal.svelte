@@ -1,7 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { clickOutsideDialog } from "$actions/click-outside-dialog";
-  import closeIcon from "$assets/close.svg";
+  import { clickOutsideDialog } from "@actions/click-outside-dialog";
+  import closeIcon from "@assets/close.svg";
+  import { Divider } from "@components/divider";
 
   export let isOpen = false;
 
@@ -31,31 +32,24 @@
 <dialog
   bind:this={dialog}
   use:clickOutsideDialog
-  class="p-0"
+  class="p-0 bg-highlight rounded-lg"
   on:keydown={handleKeyDown}
   on:outclick={handleClose}
 >
-  <!-- Content -->
-  <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-    <button
-      type="button"
-      class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-      on:click={handleClose}
-    >
-      <img src={closeIcon} class="w-5 h-5" alt="Close icon" />
+  <!-- Header -->
+  <div class="flex items-center px-6 py-4">
+    <div class="w-6 h-6" />
+    <h3 class="flex-1 text-base lg:text-xl text-body font-semibold text-center">
+      <slot name="header" />
+    </h3>
+    <button class="hover:bg-primary-100 rounded" on:click={handleClose}>
+      <img src={closeIcon} class="w-6 h-6" alt="Close icon" />
       <span class="sr-only">Close modal</span>
     </button>
-    <!-- Header -->
-    <div class="px-6 py-4 border-b rounded-t dark:border-gray-600">
-      <h3
-        class="text-base font-semibold text-gray-900 lg:text-xl dark:text-white"
-      >
-        <slot name="header" />
-      </h3>
-    </div>
-    <!-- Body -->
-    <div class="p-6">
-      <slot name="body" />
-    </div>
+  </div>
+  <Divider />
+  <!-- Body -->
+  <div class="p-6">
+    <slot name="body" />
   </div>
 </dialog>
