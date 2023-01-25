@@ -6,7 +6,7 @@
   import { Providers } from "$components/providers";
 
   let isOpen = false;
-  let error = "";
+  let error: string | undefined;
 
   function handleOpen() {
     isOpen = true;
@@ -27,11 +27,7 @@
       handleClose();
     }
   }
-  $: {
-    if ($metamask.error != null) {
-      error = $metamask.error.message;
-    }
-  }
+  $: error = $metamask?.error?.message;
 </script>
 
 <Header account={$metamask.account} on:login={handleOpen} />
