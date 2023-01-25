@@ -6,6 +6,7 @@
   import { Providers } from "$components/providers";
 
   let isOpen = false;
+  let error = "";
 
   function handleOpen() {
     isOpen = true;
@@ -16,12 +17,19 @@
   function handleConnect(event: CustomEvent) {
     if (event.detail.provider === "MetaMask") {
       metamask.connect();
+    } else {
+      error = "Ops! This provider is not supported yet.";
     }
   }
 
   $: {
     if ($metamask.isConnected) {
       handleClose();
+    }
+  }
+  $: {
+    if ($metamask.error != null) {
+      error = $metamask.error.message;
     }
   }
 </script>
@@ -32,7 +40,7 @@
   <Modal {isOpen} on:close={handleClose}>
     <svelte:fragment slot="header">Connect wallet</svelte:fragment>
     <svelte:fragment slot="body">
-      <Providers on:connect={handleConnect} />
+      <Providers on:connect={handleConnect} {error} />
     </svelte:fragment>
   </Modal>
 </main>

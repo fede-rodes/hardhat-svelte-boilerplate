@@ -19,16 +19,16 @@
         intent: {
           primary: [
             "text-gray-900",
-            "bg-gray-50",
-            "hover:bg-gray-100",
+            "bg-gray-100",
+            "hover:bg-gray-200",
             "dark:bg-gray-600",
             "dark:hover:bg-gray-500",
             "dark:text-white",
           ],
         },
         size: {
-          small: ["text-sm", "p2"],
-          medium: ["text-base", "p3"],
+          small: ["text-sm", "py-2", "px-3"],
+          medium: ["text-base", "py-3", "px-4"],
         },
         fullWidth: {
           true: ["w-full"],

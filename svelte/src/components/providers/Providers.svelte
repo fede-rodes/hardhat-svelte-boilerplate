@@ -18,6 +18,8 @@
   import { createEventDispatcher } from "svelte";
   import { Button } from "$components/button";
 
+  export let error: string | undefined;
+
   const dispatch = createEventDispatcher();
 
   // TODO: use providerId or something
@@ -29,7 +31,7 @@
 </script>
 
 <p class="text-sm font-normal text-gray-500 dark:text-gray-400">
-  Connect with one of our available wallet providers or create a new one.
+  Connect with one of our available wallet providers.
 </p>
 <ul class="my-4 space-y-3">
   {#each PROVIDERS as { name, icon, klass }}
@@ -46,6 +48,11 @@
     </li>
   {/each}
 </ul>
+{#if error != null}
+  <p class="text-sm font-normal text-red-500 dark:text-red-300">
+    ERROR: {error}
+  </p>
+{/if}
 <!-- <div>
       <a
         href="#"
