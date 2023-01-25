@@ -9,47 +9,35 @@
   export let size: ButtonVariantProps["size"] = "medium";
   export let fullWidth: ButtonVariantProps["fullWidth"] = false;
   export let disabled: ButtonVariantProps["disabled"] = false;
+  export let klass = "";
 
-  type $$Props = HTMLButtonAttributes & ButtonVariantProps;
+  type $$Props = HTMLButtonAttributes &
+    ButtonVariantProps & {
+      klass?: string;
+    };
 
-  const buttonVariants = cva(
-    ["flex", "items-center", "font-bold", "rounded-lg"],
-    {
-      variants: {
-        intent: {
-          primary: [
-            "text-gray-900",
-            "bg-gray-100",
-            "hover:bg-gray-200",
-            "dark:bg-gray-600",
-            "dark:hover:bg-gray-500",
-            "dark:text-white",
-          ],
-        },
-        size: {
-          small: ["text-sm", "py-2", "px-4"],
-          medium: ["text-base", "py-3", "px-6"],
-        },
-        fullWidth: {
-          true: ["w-full"],
-        },
-        disabled: {
-          true: [
-            "cursor-not-allowed",
-            "bg-gray-100",
-            "hover:bg-gray-100",
-            "dark:bg-gray-500",
-            "dark:hover:bg-gray-500",
-          ],
-        },
+  const buttonVariants = cva(["font-bold", "rounded-lg"], {
+    variants: {
+      intent: {
+        primary: ["text-body", "bg-primary", "hover:bg-primary-100"],
       },
-    }
-  );
+      size: {
+        small: ["text-sm", "py-2", "px-4"],
+        medium: ["text-base", "py-3", "px-6"],
+      },
+      fullWidth: {
+        true: ["w-full"],
+      },
+      disabled: {
+        true: ["cursor-not-allowed", "bg-primary-100"],
+      },
+    },
+  });
 </script>
 
 <button
   type="button"
-  class={buttonVariants({ intent, size, fullWidth, disabled })}
+  class={`${buttonVariants({ intent, size, fullWidth, disabled })} ${klass}`}
   {disabled}
   on:click
   {...$$restProps}
