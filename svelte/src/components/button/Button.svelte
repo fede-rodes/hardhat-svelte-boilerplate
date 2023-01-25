@@ -27,14 +27,20 @@
           ],
         },
         size: {
-          small: ["text-sm", "py-2", "px-3"],
-          medium: ["text-base", "py-3", "px-4"],
+          small: ["text-sm", "py-2", "px-4"],
+          medium: ["text-base", "py-3", "px-6"],
         },
         fullWidth: {
           true: ["w-full"],
         },
         disabled: {
-          true: ["cursor-not-allowed", "bg-gray-100", "dark:bg-gray-500"],
+          true: [
+            "cursor-not-allowed",
+            "bg-gray-100",
+            "hover:bg-gray-100",
+            "dark:bg-gray-500",
+            "dark:hover:bg-gray-500",
+          ],
         },
       },
     }

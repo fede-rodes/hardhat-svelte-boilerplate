@@ -1,9 +1,9 @@
 <script lang="ts" context="module">
-  import metamaskIcon from "$assets/metamask.svg";
-  import coinbaseIcon from "$assets/coinbase.svg";
-  import operaWalletIcon from "$assets/opera_wallet.svg";
-  import walletConnectIcon from "$assets/wallet_connect.svg";
-  import formaticIcon from "$assets/formatic.svg";
+  import metamaskIcon from "@assets/metamask.svg";
+  import coinbaseIcon from "@assets/coinbase.svg";
+  import operaWalletIcon from "@assets/opera_wallet.svg";
+  import walletConnectIcon from "@assets/wallet_connect.svg";
+  import formaticIcon from "@assets/formatic.svg";
 
   export const PROVIDERS = [
     { name: "MetaMask", icon: metamaskIcon, klass: "h-4" },
@@ -16,7 +16,7 @@
 
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { Button } from "$components/button";
+  import { Button } from "@components/button";
 
   export let error: string | undefined;
 

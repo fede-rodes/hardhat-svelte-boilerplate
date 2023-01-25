@@ -1,8 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { shortenAddress } from "$utils/shorten-address";
-  import svelteLogo from "$assets/svelte.svg";
-  import { Button } from "$components/button";
+  import { shortenAddress } from "@utils/shorten-address";
+  import svelteLogo from "@assets/svelte.svg";
+  import { Button } from "@components/button";
 
   export let account: Address | undefined;
 

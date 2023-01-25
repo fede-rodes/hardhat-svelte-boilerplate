@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { clickOutsideDialog } from "$actions/click-outside-dialog";
-  import closeIcon from "$assets/close.svg";
+  import { clickOutsideDialog } from "@actions/click-outside-dialog";
+  import closeIcon from "@assets/close.svg";
 
   export let isOpen = false;
 

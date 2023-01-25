@@ -1,4 +1,4 @@
-import "../src/app.css";
+import "../src/styles/app.css";
 
 // export const decorators = [
 //   (Story, { globals }) => {

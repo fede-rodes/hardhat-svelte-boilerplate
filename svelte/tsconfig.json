@@ -19,12 +19,13 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "$actions/*": ["src/actions/*"],
-      "$assets/*": ["src/assets/*"],
-      "$components/*": ["src/components/*"],
-      "$stores/*": ["src/stores/*"],
-      "$types/*": ["src/types/*"],
-      "$utils/*": ["src/utils/*"]
+      "@actions/*": ["src/actions/*"],
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@stores/*": ["src/stores/*"],
+      "@types/*": ["src/types/*"],
+      "@utils/*": ["src/utils/*"],
+      "@styles/*": ["src/styles/*"]
     }
   },
   "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],

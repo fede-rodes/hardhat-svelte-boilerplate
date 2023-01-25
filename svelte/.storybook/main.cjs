@@ -27,12 +27,13 @@ module.exports = {
            * 1. .storybook/main.cjs.
            * 2. tsconfig.json
            */
-          $actions: resolve("./src/actions"),
-          $assets: resolve("./src/assets"),
-          $components: resolve("./src/components"),
-          $stores: resolve("./src/stores"),
-          $types: resolve("./src/types"),
-          $utils: resolve("./src/utils"),
+          "@actions": resolve("./src/actions"),
+          "@assets": resolve("./src/assets"),
+          "@components": resolve("./src/components"),
+          "@stores": resolve("./src/stores"),
+          "@types": resolve("./src/types"),
+          "@utils": resolve("./src/utils"),
+          "@styles": resolve("./src/styles"),
         },
       },
     });
