@@ -4,13 +4,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "rgb(var(--color-primary))",
-        "primary-100": "rgb(var(--color-primary-100))",
-        body: "rgb(var(--color-body))",
-        background: "rgb(var(--color-background))",
-        highlight: "rgb(var(--color-highlight))",
-        muted: "rgb(var(--color-muted))",
-        accent: "rgb(var(--color-accent))",
+        primary: "rgb(var(--color-primary) / <alpha-value>)",
+        "primary-100": "rgb(var(--color-primary-100) / <alpha-value>)",
+        body: "rgb(var(--color-body) / <alpha-value>)",
+        background: "rgb(var(--color-background) / <alpha-value>)",
+        highlight: "rgb(var(--color-highlight) / <alpha-value>)",
+        muted: "rgb(var(--color-muted) / <alpha-value>)",
+        accent: "rgb(var(--color-accent) / <alpha-value>)",
       },
     },
   },
