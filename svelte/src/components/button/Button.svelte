@@ -16,14 +16,15 @@
       klass?: string;
     };
 
-  const buttonVariants = cva(["font-bold", "rounded-lg"], {
+  const buttonVariants = cva(["font-bold"], {
     variants: {
       intent: {
         primary: ["text-body", "bg-primary", "hover:bg-primary-100"],
       },
       size: {
-        small: ["text-sm", "py-2", "px-4"],
-        medium: ["text-base", "py-3", "px-6"],
+        tiny: ["text-xs", "rounded"],
+        small: ["text-sm", "py-2", "px-4", "rounded-lg"],
+        medium: ["text-base", "py-3", "px-6", "rounded-lg"],
       },
       fullWidth: {
         true: ["w-full"],
@@ -37,7 +38,7 @@
 
 <button
   type="button"
-  class={`${buttonVariants({ intent, size, fullWidth, disabled })} ${klass}`}
+  class={buttonVariants({ intent, size, fullWidth, disabled, class: klass })}
   {disabled}
   on:click
   {...$$restProps}

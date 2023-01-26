@@ -3,6 +3,7 @@
   import { clickOutsideDialog } from "@actions/click-outside-dialog";
   import closeIcon from "@assets/close.svg";
   import { Divider } from "@components/divider";
+  import { Button } from "@components/button";
 
   export let isOpen = false;
 
@@ -32,7 +33,7 @@
 <dialog
   bind:this={dialog}
   use:clickOutsideDialog
-  class="p-0 bg-highlight rounded-lg"
+  class="p-0 bg-highlight rounded-lg backdrop:bg-transparent/70"
   on:keydown={handleKeyDown}
   on:outclick={handleClose}
 >
@@ -42,10 +43,10 @@
     <h3 class="flex-1 text-base lg:text-xl text-body font-semibold text-center">
       <slot name="header" />
     </h3>
-    <button class="hover:bg-primary-100 rounded" on:click={handleClose}>
+    <Button size="tiny" klass="bg-transparent" on:click={handleClose}>
       <img src={closeIcon} class="w-6 h-6" alt="Close icon" />
       <span class="sr-only">Close modal</span>
-    </button>
+    </Button>
   </div>
   <Divider />
   <!-- Body -->
