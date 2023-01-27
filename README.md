@@ -12,6 +12,21 @@ npx hardhat node
 npx hardhat run scripts/deploy.ts
 ```
 
+# Local Hardhat instance
+
+Open a terminal and type
+
+```
+$ npx hardhat node
+Started HTTP and WebSocket JSON-RPC server at http://127.0.0.1:8545/
+```
+
+On a new terminal, deploy and instance of the Lock.sol contract
+
+```
+npx hardhat run scripts/deploy.ts --network localhost
+```
+
 # How the project was setup
 
 ## Setup hardhat
