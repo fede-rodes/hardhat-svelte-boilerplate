@@ -1,42 +1,28 @@
 <script lang="ts">
-  import "@styles/app.css";
+  import { onMount } from "svelte";
+  import { ethers } from "ethers";
+  import { Greeter } from "@contracts/greeter";
   import { metamask } from "@stores/metamask";
-  import { Header } from "@components/header";
-  import { Modal } from "@components/modal";
-  import { Providers } from "@components/providers";
+  import { Layout } from "@components/layout";
 
-  let isOpen = false;
-  let error: string | undefined;
+  let greet = "";
 
-  function handleOpen() {
-    isOpen = true;
-  }
-  function handleClose() {
-    isOpen = false;
-  }
-  function handleConnect(event: CustomEvent) {
-    if (event.detail.provider === "MetaMask") {
-      metamask.connect();
-    } else {
-      error = "Ops! This provider is not supported yet.";
+  onMount(async function () {
+    if (window.ethereum == null) {
+      return;
     }
-  }
 
-  $: {
-    if ($metamask.isConnected) {
-      handleClose();
-    }
-  }
-  $: error = $metamask?.error?.message;
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const greeter = new Greeter(provider);
+
+    greet = await greeter.greet_();
+  });
 </script>
 
-<Header account={$metamask.account} on:login={handleOpen} />
-
-<main>
-  <Modal {isOpen} on:close={handleClose}>
-    <svelte:fragment slot="header">Connect wallet</svelte:fragment>
-    <svelte:fragment slot="body">
-      <Providers on:connect={handleConnect} {error} />
-    </svelte:fragment>
-  </Modal>
-</main>
+<Layout>
+  {#if $metamask.account}
+    Greeter.sol says: &ldquo;{greet}&rdquo;
+  {:else}
+    <h3>Connect wallet</h3>
+  {/if}
+</Layout>

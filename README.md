@@ -1,16 +1,36 @@
-# Sample Hardhat Project
+# Getting started
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.ts
 ```
+git clone git@github.com:fede-rodes/hardhat-svelte-boilerplate.git
+cd hardhat-svelte-boilerplate
+npm i
+cd svelte
+npm i
+cp ./env.localhost ./env
+```
+
+From the root directory, open a terminal and type
+
+```
+npx hardhat node
+```
+
+(This will start a HTTP and WebSocket JSON-RPC server at http://127.0.0.1:8545/)
+
+On a new terminal, deploy and instance of the Greeter.sol contract
+
+```
+npx hardhat run scripts/deploy.ts --network localhost
+```
+
+Run the svelte app on a new terminal
+
+```
+cd svelte
+npm run dev
+```
+
+Connect with MetaMask via `Localhost 8545` network
 
 # How the project was setup
 

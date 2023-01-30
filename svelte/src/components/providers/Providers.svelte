@@ -22,7 +22,6 @@
 
   const dispatch = createEventDispatcher();
 
-  // TODO: use providerId or something
   function handleClick(provider: string) {
     dispatch("connect", {
       provider,

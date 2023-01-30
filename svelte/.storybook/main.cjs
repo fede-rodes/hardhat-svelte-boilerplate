@@ -24,8 +24,9 @@ module.exports = {
         alias: {
           /**
            * Reminder to ensure aliases are also added here:
-           * 1. .storybook/main.cjs.
+           * 1. .storybook/main.cjs
            * 2. tsconfig.json
+           * 3. vite.config.ts
            */
           "@actions": resolve("./src/actions"),
           "@assets": resolve("./src/assets"),
@@ -34,6 +35,8 @@ module.exports = {
           "@types": resolve("./src/types"),
           "@utils": resolve("./src/utils"),
           "@styles": resolve("./src/styles"),
+          "@artifacts": resolve("./src/artifacts"),
+          "@contracts": resolve("./src/contracts"),
         },
       },
     });
