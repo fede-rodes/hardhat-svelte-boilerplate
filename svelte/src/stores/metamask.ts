@@ -1,4 +1,7 @@
 import { writable } from "svelte/store";
+import type { MetaMaskInpageProvider } from "@metamask/providers";
+
+const provider = window.ethereum;
 
 export type Connexion = {
   account: Address | undefined;
@@ -20,7 +23,7 @@ function createStore() {
     subscribe,
     connect: async () => {
       try {
-        if (window.ethereum == null) {
+        if (!provider?.isMetaMask) {
           update((c) => ({
             ...c,
             error: new Error("MetaMask is not installed."),
@@ -30,14 +33,17 @@ function createStore() {
 
         update((c) => ({ ...c, loading: true }));
 
-        const accounts = (await window.ethereum.request({
+        const accounts = <Address[]>await (
+          provider as unknown as MetaMaskInpageProvider
+        ).request({
           method: "eth_requestAccounts",
-        })) as Address[];
+        });
 
         if (accounts.length === 0) {
           update((c) => ({
             ...c,
             error: new Error("No account found."),
+            loading: false,
           }));
           return;
         }
@@ -70,7 +76,7 @@ function createStore() {
 
 export const metamask = createStore();
 
-if (window.ethereum != null) {
+if (provider?.isMetaMask) {
   // Connect account on landing or reload
   // const accounts = (await window.ethereum.request({
   //   method: "eth_requestAccounts",
@@ -81,7 +87,10 @@ if (window.ethereum != null) {
   // }
 
   // Disconnect on accounts changed
-  window.ethereum.on("accountsChanged", async () => {
-    metamask.disconnect();
-  });
+  (provider as unknown as MetaMaskInpageProvider).on(
+    "accountsChanged",
+    async () => {
+      metamask.disconnect();
+    }
+  );
 }

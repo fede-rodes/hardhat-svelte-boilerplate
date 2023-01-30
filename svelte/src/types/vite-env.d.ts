@@ -6,7 +6,7 @@
  */
 
 interface ImportMetaEnv {
-  readonly VITE_LOCK_CONTRACT_ADDRESS: string;
+  readonly VITE_GREETER_CONTRACT_ADDRESS: string;
 }
 
 interface ImportMeta {

@@ -36,6 +36,7 @@ module.exports = {
           "@utils": resolve("./src/utils"),
           "@styles": resolve("./src/styles"),
           "@artifacts": resolve("./src/artifacts"),
+          "@contracts": resolve("./src/contracts"),
         },
       },
     });
