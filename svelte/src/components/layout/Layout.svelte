@@ -1,6 +1,6 @@
 <script lang="ts">
   import "@styles/app.css";
-  import { metamask } from "@stores/metamask";
+  import { wallet } from "@stores/wallet";
   import { Header } from "@components/header";
   import { Modal } from "@components/modal";
   import { Providers } from "@components/providers";
@@ -15,22 +15,23 @@
     isOpen = false;
   }
   function handleConnect(event: CustomEvent) {
-    if (event.detail.provider === "MetaMask") {
-      metamask.connect();
-    } else {
-      error = "Ops! This provider is not supported yet.";
-    }
+    wallet.connect(event.detail.provider);
+    // if (event.detail.provider === "MetaMask") {
+    //   metamask.connect();
+    // } else {
+    //   error = "Ops! This provider is not supported yet.";
+    // }
   }
 
   $: {
-    if ($metamask.isConnected) {
+    if ($wallet.isConnected) {
       handleClose();
     }
   }
-  $: error = $metamask?.error?.message;
+  $: error = $wallet?.error?.message;
 </script>
 
-<Header account={$metamask.account} on:login={handleOpen} />
+<Header account={$wallet.account} on:login={handleOpen} />
 
 <main>
   <slot />

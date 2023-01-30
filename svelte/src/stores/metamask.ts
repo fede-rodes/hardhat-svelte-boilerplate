@@ -1,14 +1,7 @@
 import { writable } from "svelte/store";
-import type { MetaMaskInpageProvider } from "@metamask/providers";
+import type { Connexion } from "@typings/types";
 
 const provider = window.ethereum;
-
-export type Connexion = {
-  account: Address | undefined;
-  isConnected: boolean;
-  error: Error | undefined;
-  loading: boolean;
-};
 
 // TODO: read MetaMask docs https://docs.metamask.io/guide/ethereum-provider.html#using-the-provider
 function createStore() {
@@ -33,9 +26,7 @@ function createStore() {
 
         update((c) => ({ ...c, loading: true }));
 
-        const accounts = <Address[]>await (
-          provider as unknown as MetaMaskInpageProvider
-        ).request({
+        const accounts = <Address[]>await provider.request({
           method: "eth_requestAccounts",
         });
 
@@ -87,10 +78,5 @@ if (provider?.isMetaMask) {
   // }
 
   // Disconnect on accounts changed
-  (provider as unknown as MetaMaskInpageProvider).on(
-    "accountsChanged",
-    async () => {
-      metamask.disconnect();
-    }
-  );
+  provider.on("accountsChanged", metamask.disconnect);
 }

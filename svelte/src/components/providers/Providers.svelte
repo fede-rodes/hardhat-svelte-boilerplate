@@ -5,7 +5,7 @@
   import walletConnectIcon from "@assets/wallet_connect.svg";
   import formaticIcon from "@assets/formatic.svg";
 
-  export const PROVIDERS = [
+  export const WALLETS = [
     { name: "MetaMask", icon: metamaskIcon },
     { name: "Coinbase Wallet", icon: coinbaseIcon },
     { name: "Opera Wallet", icon: operaWalletIcon },
@@ -33,7 +33,7 @@
   Connect with one of our available wallet providers.
 </p>
 <ul class="my-4 space-y-3">
-  {#each PROVIDERS as { name, icon }}
+  {#each WALLETS as { name, icon }}
     <li>
       <Button
         fullWidth

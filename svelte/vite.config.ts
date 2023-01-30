@@ -11,7 +11,7 @@ export default defineConfig({
       "@assets": path.resolve("./src/assets"),
       "@components": path.resolve("./src/components"),
       "@stores": path.resolve("./src/stores"),
-      "@types": path.resolve("./src/types"),
+      "@typings": path.resolve("./src/typings"),
       "@utils": path.resolve("./src/utils"),
       "@styles": path.resolve("./src/styles"),
       "@artifacts": path.resolve("./src/artifacts"),

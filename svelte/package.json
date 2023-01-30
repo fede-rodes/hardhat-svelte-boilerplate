@@ -15,7 +15,6 @@
     "build-storybook": "storybook build"
   },
   "devDependencies": {
-    "@metamask/providers": "^10.2.1",
     "@storybook/addon-essentials": "^7.0.0-beta.30",
     "@storybook/addon-interactions": "^7.0.0-beta.30",
     "@storybook/addon-links": "^7.0.0-beta.30",

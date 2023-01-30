@@ -23,7 +23,7 @@
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
       "@stores/*": ["src/stores/*"],
-      "@types/*": ["src/types/*"],
+      "@typings/*": ["src/typings/*"],
       "@utils/*": ["src/utils/*"],
       "@styles/*": ["src/styles/*"],
       "@artifacts/*": ["src/artifacts/*"],

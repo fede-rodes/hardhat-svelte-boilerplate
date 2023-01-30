@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { ethers } from "ethers";
   import { Greeter } from "@contracts/greeter";
-  import { metamask } from "@stores/metamask";
+  import { wallet } from "@stores/wallet";
   import { Layout } from "@components/layout";
 
   let greet = "";
@@ -20,7 +20,7 @@
 </script>
 
 <Layout>
-  {#if $metamask.account}
+  {#if $wallet.isConnected}
     Greeter.sol says: &ldquo;{greet}&rdquo;
   {:else}
     <h3>Connect wallet</h3>
