@@ -15,44 +15,35 @@ function createStore() {
   return {
     subscribe,
     connect: async () => {
-      try {
-        if (!provider?.isMetaMask) {
-          update((c) => ({
-            ...c,
-            error: new Error("MetaMask is not installed."),
-          }));
-          return;
-        }
-
-        update((c) => ({ ...c, loading: true }));
-
-        const accounts = <Address[]>await provider.request({
-          method: "eth_requestAccounts",
-        });
-
-        if (accounts.length === 0) {
-          update((c) => ({
-            ...c,
-            error: new Error("No account found."),
-            loading: false,
-          }));
-          return;
-        }
-
-        set({
-          account: accounts[0],
-          isConnected: true,
-          error: undefined,
-          loading: false,
-        });
-      } catch (error: unknown) {
-        set({
-          account: undefined,
-          isConnected: false,
-          error: new Error("Something went wrong."),
-          loading: false,
-        });
+      if (!provider?.isMetaMask) {
+        update((c) => ({
+          ...c,
+          error: new Error("MetaMask is not installed."),
+        }));
+        return;
       }
+
+      update((c) => ({ ...c, loading: true }));
+
+      const accounts = <Address[]>await provider.request({
+        method: "eth_requestAccounts",
+      });
+
+      if (accounts.length === 0) {
+        update((c) => ({
+          ...c,
+          error: new Error("No accounts found."),
+          loading: false,
+        }));
+        return;
+      }
+
+      update((c) => ({
+        ...c,
+        account: accounts[0],
+        isConnected: true,
+        loading: false,
+      }));
     },
     disconnect: () => {
       set({

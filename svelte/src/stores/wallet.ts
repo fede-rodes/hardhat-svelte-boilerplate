@@ -10,14 +10,29 @@ function createStore() {
     loading: false,
   });
 
+  let connectedWallet: string | undefined;
+
   metamask.subscribe(set);
 
   return {
     subscribe,
     connect: async (walletName: string) => {
-      if (walletName === "MetaMask") {
-        return metamask.connect();
+      try {
+        if (walletName === "MetaMask") {
+          await metamask.connect();
+          connectedWallet = walletName;
+          return;
+        }
+      } catch (error) {
+        set({
+          account: undefined,
+          isConnected: false,
+          error: new Error(error?.message || "Something went wrong."),
+          loading: false,
+        });
+        return;
       }
+
       set({
         account: undefined,
         isConnected: false,
@@ -26,7 +41,7 @@ function createStore() {
       });
     },
     disconnect: () => {
-      metamask.disconnect();
+      if (connectedWallet === "MetaMask") metamask.disconnect();
     },
   };
 }

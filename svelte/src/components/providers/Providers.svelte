@@ -15,18 +15,16 @@
 </script>
 
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
+  import { wallet } from "@stores/wallet";
   import { Button } from "@components/button";
 
-  export let error: string | undefined;
+  let error: string | undefined;
 
-  const dispatch = createEventDispatcher();
-
-  function handleClick(provider: string) {
-    dispatch("connect", {
-      provider,
-    });
+  function handleConnect(walletName: string) {
+    wallet.connect(walletName);
   }
+
+  $: error = $wallet?.error?.message;
 </script>
 
 <p class="text-sm font-normal text-accent">
@@ -39,7 +37,7 @@
         fullWidth
         klass="flex items-center space-x-3"
         on:click={() => {
-          handleClick(name);
+          handleConnect(name);
         }}
       >
         <img src={icon} class="h-5" alt={`${name} icon`} />

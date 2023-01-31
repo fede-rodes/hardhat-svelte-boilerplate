@@ -4,6 +4,7 @@
   import { Greeter } from "@contracts/greeter";
   import { wallet } from "@stores/wallet";
   import { Layout } from "@components/layout";
+  import { Button } from "@components/button";
 
   let greet = "";
 
@@ -19,10 +20,10 @@
   });
 </script>
 
-<Layout>
+<Layout let:login>
   {#if $wallet.isConnected}
-    Greeter.sol says: &ldquo;{greet}&rdquo;
+    <p class="text-body">Greeter.sol says: &ldquo;{greet}&rdquo;</p>
   {:else}
-    <h3>Connect wallet</h3>
+    <Button on:click={login}>Connect wallet</Button>
   {/if}
 </Layout>
