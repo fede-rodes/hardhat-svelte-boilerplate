@@ -17,20 +17,10 @@ function createStore() {
   return {
     subscribe,
     connect: async (walletName: string) => {
-      try {
-        if (walletName === "MetaMask") {
-          await metamask.connect();
+      if (walletName === "MetaMask") {
+        return metamask.connect(() => {
           connectedWallet = walletName;
-          return;
-        }
-      } catch (error) {
-        set({
-          account: undefined,
-          isConnected: false,
-          error: new Error(error?.message || "Something went wrong."),
-          loading: false,
         });
-        return;
       }
 
       set({
