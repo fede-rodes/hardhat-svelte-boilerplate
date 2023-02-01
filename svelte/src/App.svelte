@@ -10,7 +10,7 @@
   let newGreeting = "";
   let disabled = false;
 
-  onMount(async function () {
+  async function getGreeting() {
     if (window.ethereum == null) {
       return;
     }
@@ -23,7 +23,7 @@
     } catch (error) {
       // TODO
     }
-  });
+  }
 
   async function handleSubmit() {
     if (window.ethereum == null) {
@@ -38,26 +38,34 @@
       const greeter = new Greeter(signer);
 
       await greeter.setGreeting_(newGreeting);
+      await getGreeting();
     } catch (error) {
       // TODO
     } finally {
       disabled = false;
     }
   }
+
+  onMount(getGreeting);
 </script>
 
 <Layout let:login>
   {#if $wallet.isConnected}
-    <p class="text-body">Greeter.sol says: &ldquo;{greet}&rdquo;</p>
-
+    <h3 class="text-base lg:text-xl text-body font-semibold text-center">
+      Greeter.sol says: &ldquo;{greet}&rdquo;
+    </h3>
+    <div class="h-8" />
     <form
       class="flex flex-col space-y-3"
       on:submit|preventDefault={handleSubmit}
     >
       <input
         type="text"
+        id="greeting"
         bind:value={newGreeting}
-        class="border border-red-100"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder="Add a new greeting..."
+        required
       />
       <Button type="submit" {disabled}>Update greeting</Button>
     </form>
