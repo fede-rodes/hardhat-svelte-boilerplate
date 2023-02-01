@@ -5,7 +5,7 @@
   import walletConnectIcon from "@assets/wallet_connect.svg";
   import formaticIcon from "@assets/formatic.svg";
 
-  export const PROVIDERS = [
+  export const WALLETS = [
     { name: "MetaMask", icon: metamaskIcon },
     { name: "Coinbase Wallet", icon: coinbaseIcon },
     { name: "Opera Wallet", icon: operaWalletIcon },
@@ -15,31 +15,29 @@
 </script>
 
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
+  import { wallet } from "@stores/wallet";
   import { Button } from "@components/button";
 
-  export let error: string | undefined;
+  let error: string | undefined;
 
-  const dispatch = createEventDispatcher();
-
-  function handleClick(provider: string) {
-    dispatch("connect", {
-      provider,
-    });
+  function handleConnect(walletName: string) {
+    wallet.connect(walletName);
   }
+
+  $: error = $wallet?.error?.message;
 </script>
 
 <p class="text-sm font-normal text-accent">
   Connect with one of our available wallet providers.
 </p>
 <ul class="my-4 space-y-3">
-  {#each PROVIDERS as { name, icon }}
+  {#each WALLETS as { name, icon }}
     <li>
       <Button
         fullWidth
         klass="flex items-center space-x-3"
         on:click={() => {
-          handleClick(name);
+          handleConnect(name);
         }}
       >
         <img src={icon} class="h-5" alt={`${name} icon`} />

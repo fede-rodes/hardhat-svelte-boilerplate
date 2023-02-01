@@ -32,7 +32,7 @@ module.exports = {
           "@assets": resolve("./src/assets"),
           "@components": resolve("./src/components"),
           "@stores": resolve("./src/stores"),
-          "@types": resolve("./src/types"),
+          "@typings": resolve("./src/typings"),
           "@utils": resolve("./src/utils"),
           "@styles": resolve("./src/styles"),
           "@artifacts": resolve("./src/artifacts"),

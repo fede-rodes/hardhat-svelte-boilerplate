@@ -1,14 +1,7 @@
 import { writable } from "svelte/store";
-import type { MetaMaskInpageProvider } from "@metamask/providers";
+import type { Connexion } from "@typings/types";
 
 const provider = window.ethereum;
-
-export type Connexion = {
-  account: Address | undefined;
-  isConnected: boolean;
-  error: Error | undefined;
-  loading: boolean;
-};
 
 // TODO: read MetaMask docs https://docs.metamask.io/guide/ethereum-provider.html#using-the-provider
 function createStore() {
@@ -21,7 +14,7 @@ function createStore() {
 
   return {
     subscribe,
-    connect: async () => {
+    connect: async (callback?: () => void) => {
       try {
         if (!provider?.isMetaMask) {
           update((c) => ({
@@ -33,34 +26,36 @@ function createStore() {
 
         update((c) => ({ ...c, loading: true }));
 
-        const accounts = <Address[]>await (
-          provider as unknown as MetaMaskInpageProvider
-        ).request({
+        const accounts = <Address[]>await provider.request({
           method: "eth_requestAccounts",
         });
 
         if (accounts.length === 0) {
           update((c) => ({
             ...c,
-            error: new Error("No account found."),
+            error: new Error("No accounts found."),
             loading: false,
           }));
           return;
         }
 
-        set({
+        update((c) => ({
+          ...c,
           account: accounts[0],
           isConnected: true,
-          error: undefined,
           loading: false,
-        });
-      } catch (error: unknown) {
+        }));
+
+        // Run arbitrary logic after successful connexion
+        callback != null && callback();
+      } catch (error) {
         set({
           account: undefined,
           isConnected: false,
-          error: new Error("Something went wrong."),
+          error: new Error(error?.message || "Something went wrong."),
           loading: false,
         });
+        return;
       }
     },
     disconnect: () => {
@@ -87,10 +82,5 @@ if (provider?.isMetaMask) {
   // }
 
   // Disconnect on accounts changed
-  (provider as unknown as MetaMaskInpageProvider).on(
-    "accountsChanged",
-    async () => {
-      metamask.disconnect();
-    }
-  );
+  provider.on("accountsChanged", metamask.disconnect);
 }

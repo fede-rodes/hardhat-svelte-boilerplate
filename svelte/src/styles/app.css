@@ -11,6 +11,7 @@ background	Body background color
 highlight	  A background color for highlighting text
 muted	      A faint color for borders, backgrounds, and accents that do not require high contrast with the background color
 accent	    A contrast color for emphasizing UI
+danger      A color for displaying error messages
 */
 @layer base {
   :root {

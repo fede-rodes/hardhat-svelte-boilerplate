@@ -6,6 +6,12 @@ const config: HardhatUserConfig = {
   paths: {
     artifacts: "./svelte/src/artifacts",
   },
+  // See: https://hardhat.org/hardhat-network/docs/metamask-issue
+  networks: {
+    hardhat: {
+      chainId: 1337,
+    },
+  },
 };
 
 export default config;
