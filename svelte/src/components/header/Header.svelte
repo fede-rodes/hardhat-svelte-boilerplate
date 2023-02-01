@@ -2,6 +2,7 @@
   import { createEventDispatcher } from "svelte";
   import { shortenAddress } from "@utils/shorten-address";
   import svelteLogo from "@assets/svelte.svg";
+  import { DarkMode } from "@components/dark-mode";
   import { Button } from "@components/button";
 
   export let account: Address | undefined;
@@ -25,9 +26,12 @@
     <img src={svelteLogo} class="h-6 sm:h-9" alt="Svelte Logo" />
   </a>
 
-  {#if account != null}
-    <Button size="small">{shortenAddress(account)}</Button>
-  {:else}
-    <Button size="small" on:click={handleLogin}>Connect wallet</Button>
-  {/if}
+  <div class="flex space-x-3">
+    <DarkMode />
+    {#if account != null}
+      <Button size="small">{shortenAddress(account)}</Button>
+    {:else}
+      <Button size="small" on:click={handleLogin}>Connect wallet</Button>
+    {/if}
+  </div>
 </nav>
