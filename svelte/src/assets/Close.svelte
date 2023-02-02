@@ -3,6 +3,7 @@
   fill="currentColor"
   viewBox="0 0 20 20"
   xmlns="http://www.w3.org/2000/svg"
+  {...$$props}
 >
   <path
     fill-rule="evenodd"
@@ -10,3 +11,4 @@
     clip-rule="evenodd"
   />
 </svg>
+<span class="sr-only">Close modal</span>

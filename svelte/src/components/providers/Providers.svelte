@@ -35,7 +35,7 @@
     <li>
       <Button
         fullWidth
-        klass="flex items-center space-x-3"
+        class="flex items-center space-x-3"
         on:click={() => {
           handleConnect(name);
         }}

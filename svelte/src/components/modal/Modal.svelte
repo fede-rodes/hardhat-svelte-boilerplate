@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import { clickOutsideDialog } from "@actions/click-outside-dialog";
-  import closeIcon from "@assets/close.svg";
+  import CloseIcon from "@assets/Close.svelte";
   import { Divider } from "@components/divider";
   import { Button } from "@components/button";
 
@@ -43,10 +43,9 @@
     <h3 class="flex-1 text-base lg:text-xl text-body font-semibold text-center">
       <slot name="header" />
     </h3>
-    <Button size="tiny" klass="bg-transparent" on:click={handleClose}>
-      <img src={closeIcon} class="w-6 h-6" alt="Close icon" />
-      <span class="sr-only">Close modal</span>
-    </Button>
+    <button on:click={handleClose}>
+      <CloseIcon class="w-6 h-6 text-body" />
+    </button>
   </div>
   <Divider />
   <!-- Body -->
