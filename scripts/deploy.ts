@@ -32,7 +32,7 @@ async function main() {
     await hre
       .run("verify:verify", {
         address: greeter.address,
-        constructorArguments: [],
+        constructorArguments: [greeting],
       })
       .then((res) => {
         console.log(res);
