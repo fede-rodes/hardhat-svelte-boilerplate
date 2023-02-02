@@ -42,7 +42,10 @@
     <h3 class="flex-1 text-base lg:text-xl text-body font-semibold text-center">
       <slot name="header" />
     </h3>
-    <button on:click={handleClose}>
+    <button
+      class="hover:bg-primary-100 rounded-full p-1"
+      on:click={handleClose}
+    >
       <CloseIcon class="w-6 h-6 text-body" />
     </button>
   </div>
