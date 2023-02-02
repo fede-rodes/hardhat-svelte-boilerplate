@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import { shortenAddress } from "@utils/shorten-address";
-  import svelteLogo from "@assets/svelte.svg";
+  import SvelteLogo from "@assets/Svelte.svg";
   import { DarkMode } from "@components/dark-mode";
   import { Button } from "@components/button";
 
@@ -23,7 +23,7 @@
   "
 >
   <a href="/">
-    <img src={svelteLogo} class="h-6 sm:h-9" alt="Svelte Logo" />
+    <img src={SvelteLogo} class="h-6 sm:h-9" alt="Svelte logo" />
   </a>
 
   <div class="flex space-x-3">

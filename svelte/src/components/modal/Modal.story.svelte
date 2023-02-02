@@ -11,7 +11,7 @@
   }
 </script>
 
-<button on:click={handleOpen}>Open modal</button>
+<button class="text-body" on:click={handleOpen}>Open modal</button>
 
 <Modal {isOpen} on:close={handleClose}>
   <svelte:fragment slot="header">

@@ -27,13 +27,3 @@ export const Default: Story = {
   }),
   args: {},
 };
-
-export const Error: Story = {
-  render: (args) => ({
-    Component: Providers,
-    props: args,
-  }),
-  args: {
-    error: "Something went wrong.",
-  },
-};
