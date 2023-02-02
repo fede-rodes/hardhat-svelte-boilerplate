@@ -7,5 +7,14 @@ typechain-types
 
 # Hardhat files
 cache
-artifacts
-
+!svelte/
+svelte/*
+!svelte/src/
+svelte/src/*
+!svelte/src/artifacts/
+svelte/src/artifacts/*
+!svelte/src/artifacts/contracts
+svelte/src/artifacts/contracts/*
+!svelte/src/artifacts/contracts/Greeter.sol
+svelte/src/artifacts/contracts/Greeter.sol/*
+!svelte/src/artifacts/contracts/Greeter.sol/Greeter.json
