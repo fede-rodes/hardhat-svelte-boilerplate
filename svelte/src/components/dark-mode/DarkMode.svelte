@@ -3,10 +3,10 @@
   import MoonIcon from "@assets/Moon.svelte";
   import { Button } from "@components/button";
 
-  const toggleTheme = () => {
+  function toggleTheme() {
     const isDark = window.document.documentElement.classList.toggle("dark");
     localStorage.setItem("color-theme", isDark ? "dark" : "light");
-  };
+  }
 </script>
 
 <svelte:head>

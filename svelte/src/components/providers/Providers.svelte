@@ -17,7 +17,7 @@
 
   let error: string | undefined;
 
-  function handleConnect(walletName: string) {
+  function handleConnect(walletName: string): void {
     wallet.connect(walletName);
   }
 

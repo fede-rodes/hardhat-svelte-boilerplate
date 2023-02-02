@@ -10,7 +10,7 @@ import "../src/styles/app.css";
 
 //     document.documentElement.setAttribute("data-theme", themeMode);
 
-//     return Story;
+//     return <Story />;
 //   },
 // ];
 
