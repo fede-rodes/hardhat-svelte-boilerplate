@@ -9,12 +9,8 @@
   export let size: ButtonVariantProps["size"] = "medium";
   export let fullWidth: ButtonVariantProps["fullWidth"] = false;
   export let disabled: ButtonVariantProps["disabled"] = false;
-  export let klass = "";
 
-  type $$Props = HTMLButtonAttributes &
-    ButtonVariantProps & {
-      klass?: string;
-    };
+  type $$Props = HTMLButtonAttributes & ButtonVariantProps;
 
   const buttonVariants = cva(["font-bold"], {
     variants: {
@@ -22,8 +18,7 @@
         primary: ["text-body", "bg-primary", "hover:bg-primary-100"],
       },
       size: {
-        tiny: ["text-xs", "rounded"],
-        small: ["text-sm", "py-2", "px-4", "rounded-lg"],
+        small: ["text-sm", "p-2", "rounded-lg"],
         medium: ["text-base", "py-3", "px-6", "rounded-lg"],
       },
       fullWidth: {
@@ -38,10 +33,16 @@
 
 <button
   type="button"
-  class={buttonVariants({ intent, size, fullWidth, disabled, class: klass })}
   {disabled}
   on:click
   {...$$restProps}
+  class={buttonVariants({
+    intent,
+    size,
+    fullWidth,
+    disabled,
+    class: $$props.class,
+  })}
 >
   <slot />
 </button>

@@ -1,22 +1,19 @@
-<script lang="ts" context="module">
-  import metamaskIcon from "@assets/metamask.svg";
-  import coinbaseIcon from "@assets/coinbase.svg";
-  import operaWalletIcon from "@assets/opera_wallet.svg";
-  import walletConnectIcon from "@assets/wallet_connect.svg";
-  import formaticIcon from "@assets/formatic.svg";
-
-  export const WALLETS = [
-    { name: "MetaMask", icon: metamaskIcon },
-    { name: "Coinbase Wallet", icon: coinbaseIcon },
-    { name: "Opera Wallet", icon: operaWalletIcon },
-    { name: "WalletConnect", icon: walletConnectIcon },
-    { name: "Formatic", icon: formaticIcon },
-  ];
-</script>
-
 <script lang="ts">
   import { wallet } from "@stores/wallet";
+  import MetamaskIcon from "@assets/Metamask.svg";
+  import CoinbaseIcon from "@assets/Coinbase.svg";
+  import OperaWalletIcon from "@assets/OperaWallet.svg";
+  import WalletConnectIcon from "@assets/WalletConnect.svg";
+  import FormaticIcon from "@assets/Formatic.svg";
   import { Button } from "@components/button";
+
+  export const WALLETS = [
+    { name: "MetaMask", icon: MetamaskIcon },
+    { name: "Coinbase Wallet", icon: CoinbaseIcon },
+    { name: "Opera Wallet", icon: OperaWalletIcon },
+    { name: "WalletConnect", icon: WalletConnectIcon },
+    { name: "Formatic", icon: FormaticIcon },
+  ];
 
   let error: string | undefined;
 
@@ -35,7 +32,7 @@
     <li>
       <Button
         fullWidth
-        klass="flex items-center space-x-3"
+        class="flex items-center space-x-3"
         on:click={() => {
           handleConnect(name);
         }}
