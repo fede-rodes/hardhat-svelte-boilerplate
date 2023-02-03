@@ -6,6 +6,8 @@ function createStore() {
   const { subscribe, set } = writable<Connexion>({
     account: undefined,
     isConnected: false,
+    provider: undefined,
+    wrongNetwork: false,
     error: undefined,
     loading: false,
   });
@@ -26,6 +28,8 @@ function createStore() {
       set({
         account: undefined,
         isConnected: false,
+        provider: undefined,
+        wrongNetwork: false,
         error: new Error(`Ops! ${walletName} is not integrated yet.`),
         loading: false,
       });

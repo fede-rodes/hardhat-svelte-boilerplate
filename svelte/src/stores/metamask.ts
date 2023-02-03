@@ -1,13 +1,17 @@
 import { writable } from "svelte/store";
+import { ethers } from "ethers";
 import type { Connexion } from "@typings/types";
+import { network } from "../config";
 
-const provider = window.ethereum;
+const injected = window.ethereum;
 
 // TODO: read MetaMask docs https://docs.metamask.io/guide/ethereum-provider.html#using-the-provider
 function createStore() {
   const { subscribe, set, update } = writable<Connexion>({
     account: undefined,
     isConnected: false,
+    provider: undefined,
+    wrongNetwork: false,
     error: undefined,
     loading: false,
   });
@@ -16,7 +20,7 @@ function createStore() {
     subscribe,
     connect: async (callback?: () => void) => {
       try {
-        if (!provider?.isMetaMask) {
+        if (!injected?.isMetaMask) {
           update((c) => ({
             ...c,
             error: new Error("MetaMask is not installed."),
@@ -24,9 +28,15 @@ function createStore() {
           return;
         }
 
-        update((c) => ({ ...c, loading: true }));
+        const provider = new ethers.providers.Web3Provider(injected);
 
-        const accounts = <Address[]>await provider.request({
+        update((c) => ({
+          ...c,
+          provider,
+          loading: true,
+        }));
+
+        const accounts = <Address[]>await injected.request({
           method: "eth_requestAccounts",
         });
 
@@ -39,19 +49,26 @@ function createStore() {
           return;
         }
 
+        const network_ = await provider.getNetwork();
+
         update((c) => ({
           ...c,
           account: accounts[0],
           isConnected: true,
+          wrongNetwork: network.chainId === network_.chainId,
           loading: false,
         }));
 
         // Run arbitrary logic after successful connexion
-        callback != null && callback();
+        if (typeof callback === "function") {
+          callback();
+        }
       } catch (error) {
         set({
           account: undefined,
           isConnected: false,
+          provider: undefined,
+          wrongNetwork: false,
           error: new Error(error?.message || "Something went wrong."),
           loading: false,
         });
@@ -62,6 +79,8 @@ function createStore() {
       set({
         account: undefined,
         isConnected: false,
+        provider: undefined,
+        wrongNetwork: false,
         error: undefined,
         loading: false,
       });
@@ -71,7 +90,7 @@ function createStore() {
 
 export const metamask = createStore();
 
-if (provider?.isMetaMask) {
+if (injected?.isMetaMask) {
   // Connect account on landing or reload
   // const accounts = (await window.ethereum.request({
   //   method: "eth_requestAccounts",
@@ -81,6 +100,7 @@ if (provider?.isMetaMask) {
   //   metamask.connect();
   // }
 
-  // Disconnect on accounts changed
-  provider.on("accountsChanged", metamask.disconnect);
+  // Disconnect on accounts or network change
+  injected.on("accountsChanged", metamask.connect);
+  injected.on("chainChanged", metamask.connect);
 }

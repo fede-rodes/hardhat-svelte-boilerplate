@@ -22,7 +22,7 @@ async function main() {
 
   console.log(`Greeter contract deployed to ${greeter.address}`);
 
-  if (hre.network.name === "hardhat") {
+  if (["hardhat", "localhost"].includes(hre.network.name)) {
     console.log("Skipping contract's Etherscan verification");
   } else {
     console.log("Waiting before verification");
