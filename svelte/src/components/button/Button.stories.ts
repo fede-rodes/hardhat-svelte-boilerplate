@@ -26,7 +26,27 @@ export const Primary: Story = {
     Component: ButtonStory,
     props: args,
   }),
+  args: {
+    intent: "primary",
+  },
+};
+
+export const Secondary: Story = {
+  render: (args) => ({
+    Component: ButtonStory,
+    props: args,
+  }),
   args: {},
+};
+
+export const Danger: Story = {
+  render: (args) => ({
+    Component: ButtonStory,
+    props: args,
+  }),
+  args: {
+    intent: "danger",
+  },
 };
 
 export const Small: Story = {

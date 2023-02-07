@@ -61,11 +61,11 @@
       disabled={!$wallet.isConnected || $wallet.wrongNetwork}
     />
     {#if $wallet.isConnected && $wallet.wrongNetwork}
-      <Button type="button" {disabled}>Wrong network</Button>
+      <Button intent="danger">Wrong network</Button>
     {:else if $wallet.isConnected}
-      <Button type="submit" {disabled}>Update greeting</Button>
+      <Button type="submit" intent="primary" {disabled}>Update greeting</Button>
     {:else}
-      <Button on:click={login}>Connect wallet</Button>
+      <Button intent="primary" on:click={login}>Connect wallet</Button>
     {/if}
   </form>
 </Layout>

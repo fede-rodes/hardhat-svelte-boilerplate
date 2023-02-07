@@ -5,7 +5,7 @@
 
   type ButtonVariantProps = VariantProps<typeof buttonVariants>;
 
-  export let intent: ButtonVariantProps["intent"] = "primary";
+  export let intent: ButtonVariantProps["intent"] = "secondary";
   export let size: ButtonVariantProps["size"] = "medium";
   export let fullWidth: ButtonVariantProps["fullWidth"] = false;
   export let disabled: ButtonVariantProps["disabled"] = false;
@@ -16,6 +16,8 @@
     variants: {
       intent: {
         primary: ["text-body", "bg-primary", "hover:bg-primary-100"],
+        secondary: ["text-body", "bg-secondary", "hover:bg-secondary-100"],
+        danger: ["text-body", "bg-danger", "hover:bg-danger-100"],
       },
       size: {
         small: ["text-sm", "p-2", "rounded-lg"],
