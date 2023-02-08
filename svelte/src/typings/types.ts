@@ -5,6 +5,5 @@ export type Connexion = {
   isConnected: boolean;
   provider: Web3Provider | undefined;
   chainId: number | undefined;
-  error: Error | undefined;
   loading: boolean;
 };

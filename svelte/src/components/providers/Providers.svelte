@@ -17,11 +17,14 @@
 
   let error: string | undefined;
 
-  function handleConnect(walletName: string) {
-    wallet.connect(walletName);
+  async function handleConnect(walletName: string) {
+    try {
+      await wallet.connect(walletName);
+    } catch (error_: any) {
+      error = error_ || "Something went wrong.";
+      console.log(error_);
+    }
   }
-
-  $: error = $wallet?.error?.message;
 </script>
 
 <p class="text-sm font-normal text-accent">

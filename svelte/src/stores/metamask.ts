@@ -1,88 +1,39 @@
 import { writable } from "svelte/store";
-import { ethers } from "ethers";
-import type { Connexion } from "@typings/types";
+import type { ExternalProvider } from "@ethersproject/providers";
+
+export type Data = {
+  account: Address;
+  injected: ExternalProvider;
+};
 
 const injected = window.ethereum;
 
-// TODO: read MetaMask docs https://docs.metamask.io/guide/ethereum-provider.html#using-the-provider
+// https://docs.metamask.io/guide/ethereum-provider.html#using-the-provider
 function createStore() {
-  const { subscribe, set, update } = writable<Connexion>({
-    account: undefined,
-    isConnected: false,
-    provider: undefined,
-    chainId: undefined,
-    error: undefined,
-    loading: false,
-  });
+  const { subscribe, set } = writable<undefined | Data>();
 
   return {
     subscribe,
-    connect: async (callback?: () => void) => {
-      try {
-        if (!injected?.isMetaMask) {
-          update((c) => ({
-            ...c,
-            error: new Error("MetaMask is not installed."),
-          }));
-          return;
-        }
-
-        const provider = new ethers.providers.Web3Provider(injected);
-
-        update((c) => ({
-          ...c,
-          provider,
-          loading: true,
-        }));
-
-        const accounts = <Address[]>await injected.request({
-          method: "eth_requestAccounts",
-        });
-
-        if (accounts.length === 0) {
-          update((c) => ({
-            ...c,
-            error: new Error("No accounts found."),
-            loading: false,
-          }));
-          return;
-        }
-
-        const network = await provider.getNetwork();
-
-        update((c) => ({
-          ...c,
-          account: accounts[0],
-          isConnected: true,
-          chainId: network.chainId,
-          loading: false,
-        }));
-
-        // Run arbitrary logic after successful connexion
-        if (typeof callback === "function") {
-          callback();
-        }
-      } catch (error) {
-        set({
-          account: undefined,
-          isConnected: false,
-          provider: undefined,
-          chainId: undefined,
-          error: new Error(error?.message || "Something went wrong."),
-          loading: false,
-        });
-        return;
+    connect: async () => {
+      if (!injected?.isMetaMask) {
+        throw new Error("MetaMask is not installed.");
       }
+
+      const accounts = <Address[]>await injected.request({
+        method: "eth_requestAccounts",
+      });
+
+      if (accounts.length === 0) {
+        throw new Error("No accounts found.");
+      }
+
+      set({
+        account: accounts[0],
+        injected,
+      });
     },
     disconnect: () => {
-      set({
-        account: undefined,
-        isConnected: false,
-        provider: undefined,
-        chainId: undefined,
-        error: undefined,
-        loading: false,
-      });
+      set(undefined);
     },
   };
 }
