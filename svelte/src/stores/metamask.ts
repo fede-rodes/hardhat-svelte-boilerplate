@@ -1,7 +1,6 @@
 import { writable } from "svelte/store";
 import { ethers } from "ethers";
 import type { Connexion } from "@typings/types";
-import { network } from "../config";
 
 const injected = window.ethereum;
 
@@ -11,7 +10,7 @@ function createStore() {
     account: undefined,
     isConnected: false,
     provider: undefined,
-    wrongNetwork: false,
+    chainId: undefined,
     error: undefined,
     loading: false,
   });
@@ -49,13 +48,13 @@ function createStore() {
           return;
         }
 
-        const network_ = await provider.getNetwork();
+        const network = await provider.getNetwork();
 
         update((c) => ({
           ...c,
           account: accounts[0],
           isConnected: true,
-          wrongNetwork: network.chainId === network_.chainId,
+          chainId: network.chainId,
           loading: false,
         }));
 
@@ -68,7 +67,7 @@ function createStore() {
           account: undefined,
           isConnected: false,
           provider: undefined,
-          wrongNetwork: false,
+          chainId: undefined,
           error: new Error(error?.message || "Something went wrong."),
           loading: false,
         });
@@ -80,7 +79,7 @@ function createStore() {
         account: undefined,
         isConnected: false,
         provider: undefined,
-        wrongNetwork: false,
+        chainId: undefined,
         error: undefined,
         loading: false,
       });
@@ -103,4 +102,5 @@ if (injected?.isMetaMask) {
   // Disconnect on accounts or network change
   injected.on("accountsChanged", metamask.connect);
   injected.on("chainChanged", metamask.connect);
+  injected.on("disconnect", metamask.disconnect);
 }

@@ -5,7 +5,7 @@
   import { wallet } from "@stores/wallet";
   import { Layout } from "@components/layout";
   import { Button } from "@components/button";
-  import { network } from "./config";
+  import { chain } from "./config";
 
   let greet = "";
   let newGreeting = "";
@@ -13,7 +13,7 @@
 
   async function getGreeting() {
     try {
-      const provider = new ethers.providers.JsonRpcProvider(network.rpc[0]);
+      const provider = new ethers.providers.JsonRpcProvider(chain.rpc[0]);
       const greeter = new Greeter(provider);
 
       greet = await greeter.greet_();
@@ -58,9 +58,9 @@
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       placeholder="Add a new greeting..."
       required
-      disabled={!$wallet.isConnected || $wallet.wrongNetwork}
+      disabled={!$wallet.isConnected || $wallet.chainId != chain.chainId}
     />
-    {#if $wallet.isConnected && $wallet.wrongNetwork}
+    {#if $wallet.isConnected && $wallet.chainId !== chain.chainId}
       <Button intent="danger">Wrong network</Button>
     {:else if $wallet.isConnected}
       <Button type="submit" intent="primary" {disabled}>Update greeting</Button>

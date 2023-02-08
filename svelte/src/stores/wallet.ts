@@ -7,7 +7,7 @@ function createStore() {
     account: undefined,
     isConnected: false,
     provider: undefined,
-    wrongNetwork: false,
+    chainId: undefined,
     error: undefined,
     loading: false,
   });
@@ -29,7 +29,7 @@ function createStore() {
         account: undefined,
         isConnected: false,
         provider: undefined,
-        wrongNetwork: false,
+        chainId: undefined,
         error: new Error(`Ops! ${walletName} is not integrated yet.`),
         loading: false,
       });

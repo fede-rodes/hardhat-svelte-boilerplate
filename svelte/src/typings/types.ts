@@ -4,7 +4,7 @@ export type Connexion = {
   account: Address | undefined;
   isConnected: boolean;
   provider: Web3Provider | undefined;
-  wrongNetwork: boolean;
+  chainId: number | undefined;
   error: Error | undefined;
   loading: boolean;
 };
