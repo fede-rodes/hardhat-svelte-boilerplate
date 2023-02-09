@@ -1,77 +1,46 @@
 import { writable } from "svelte/store";
-import type { Connexion } from "@typings/types";
+import type { ExternalProvider } from "@ethersproject/providers";
 
-const provider = window.ethereum;
+export type Data = {
+  account: Address;
+  injected: ExternalProvider;
+};
 
-// TODO: read MetaMask docs https://docs.metamask.io/guide/ethereum-provider.html#using-the-provider
+const injected = window.ethereum;
+
+// https://docs.metamask.io/guide/ethereum-provider.html#using-the-provider
 function createStore() {
-  const { subscribe, set, update } = writable<Connexion>({
-    account: undefined,
-    isConnected: false,
-    error: undefined,
-    loading: false,
-  });
+  const { subscribe, set } = writable<undefined | Data>();
 
   return {
     subscribe,
-    connect: async (callback?: () => void) => {
-      try {
-        if (!provider?.isMetaMask) {
-          update((c) => ({
-            ...c,
-            error: new Error("MetaMask is not installed."),
-          }));
-          return;
-        }
-
-        update((c) => ({ ...c, loading: true }));
-
-        const accounts = <Address[]>await provider.request({
-          method: "eth_requestAccounts",
-        });
-
-        if (accounts.length === 0) {
-          update((c) => ({
-            ...c,
-            error: new Error("No accounts found."),
-            loading: false,
-          }));
-          return;
-        }
-
-        update((c) => ({
-          ...c,
-          account: accounts[0],
-          isConnected: true,
-          loading: false,
-        }));
-
-        // Run arbitrary logic after successful connexion
-        callback != null && callback();
-      } catch (error) {
-        set({
-          account: undefined,
-          isConnected: false,
-          error: new Error(error?.message || "Something went wrong."),
-          loading: false,
-        });
-        return;
+    connect: async () => {
+      if (!injected?.isMetaMask) {
+        throw new Error("MetaMask is not installed.");
       }
+
+      const accounts = <Address[]>await injected.request({
+        method: "eth_requestAccounts",
+      });
+
+      if (accounts.length === 0) {
+        throw new Error("No accounts found.");
+      }
+
+      set({
+        account: accounts[0],
+        injected,
+      });
     },
     disconnect: () => {
-      set({
-        account: undefined,
-        isConnected: false,
-        error: undefined,
-        loading: false,
-      });
+      set(undefined);
     },
   };
 }
 
 export const metamask = createStore();
 
-if (provider?.isMetaMask) {
+if (injected?.isMetaMask) {
   // Connect account on landing or reload
   // const accounts = (await window.ethereum.request({
   //   method: "eth_requestAccounts",
@@ -81,6 +50,8 @@ if (provider?.isMetaMask) {
   //   metamask.connect();
   // }
 
-  // Disconnect on accounts changed
-  provider.on("accountsChanged", metamask.disconnect);
+  // Disconnect on accounts or network change
+  injected.on("accountsChanged", metamask.connect);
+  injected.on("chainChanged", metamask.connect);
+  injected.on("disconnect", metamask.disconnect);
 }
