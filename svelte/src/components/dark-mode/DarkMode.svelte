@@ -1,6 +1,6 @@
 <script lang="ts">
-  import SunIcon from "@assets/Sun.svelte";
-  import MoonIcon from "@assets/Moon.svelte";
+  import SunIcon from "@/assets/Sun.svelte";
+  import MoonIcon from "@/assets/Moon.svelte";
 
   function toggleTheme() {
     const isDark = window.document.documentElement.classList.toggle("dark");

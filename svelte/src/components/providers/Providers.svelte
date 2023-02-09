@@ -1,11 +1,11 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import MetamaskIcon from "@assets/Metamask.svg";
-  import CoinbaseIcon from "@assets/Coinbase.svg";
-  import OperaWalletIcon from "@assets/OperaWallet.svg";
-  import WalletConnectIcon from "@assets/WalletConnect.svg";
-  import FormaticIcon from "@assets/Formatic.svg";
-  import { Button } from "@components/button";
+  import MetamaskIcon from "@/assets/Metamask.svg";
+  import CoinbaseIcon from "@/assets/Coinbase.svg";
+  import OperaWalletIcon from "@/assets/OperaWallet.svg";
+  import WalletConnectIcon from "@/assets/WalletConnect.svg";
+  import FormaticIcon from "@/assets/Formatic.svg";
+  import { Button } from "@/components/button";
 
   const WALLETS = [
     { name: "MetaMask", icon: MetamaskIcon },

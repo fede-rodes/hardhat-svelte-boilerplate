@@ -1,9 +1,9 @@
 <script lang="ts">
-  import "@styles/app.css";
-  import { wallet } from "@stores/wallet";
-  import { Header } from "@components/header";
-  import { Modal } from "@components/modal";
-  import { Providers } from "@components/providers";
+  import "@/styles/app.css";
+  import { wallet } from "@/stores/wallet";
+  import { Header } from "@/components/header";
+  import { Modal } from "@/components/modal";
+  import { Providers } from "@/components/providers";
 
   let isOpen = false;
   let error: string | undefined;
