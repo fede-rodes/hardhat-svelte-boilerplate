@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { wallet } from "@stores/wallet";
-  import MetamaskIcon from "@assets/Metamask.svg";
-  import CoinbaseIcon from "@assets/Coinbase.svg";
-  import OperaWalletIcon from "@assets/OperaWallet.svg";
-  import WalletConnectIcon from "@assets/WalletConnect.svg";
-  import FormaticIcon from "@assets/Formatic.svg";
-  import { Button } from "@components/button";
+  import { createEventDispatcher } from "svelte";
+  import MetamaskIcon from "@/assets/Metamask.svg";
+  import CoinbaseIcon from "@/assets/Coinbase.svg";
+  import OperaWalletIcon from "@/assets/OperaWallet.svg";
+  import WalletConnectIcon from "@/assets/WalletConnect.svg";
+  import FormaticIcon from "@/assets/Formatic.svg";
+  import { Button } from "@/components/button";
 
-  export const WALLETS = [
+  const WALLETS = [
     { name: "MetaMask", icon: MetamaskIcon },
     { name: "Coinbase Wallet", icon: CoinbaseIcon },
     { name: "Opera Wallet", icon: OperaWalletIcon },
@@ -15,15 +15,14 @@
     { name: "Formatic", icon: FormaticIcon },
   ];
 
-  let error: string | undefined;
+  export let error: string | undefined;
+
+  const dispatch = createEventDispatcher();
 
   async function handleConnect(walletName: string) {
-    try {
-      await wallet.connect(walletName);
-    } catch (error_: any) {
-      error = error_ || "Something went wrong.";
-      console.log(error_);
-    }
+    dispatch("connect", {
+      walletName,
+    });
   }
 </script>
 
