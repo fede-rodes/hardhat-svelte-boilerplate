@@ -1,5 +1,5 @@
 const { resolve } = require("path");
-const { mergeConfig } = require("vite"); // use `mergeConfig` to recursively merge Vite options;
+const { loadConfigFromFile, mergeConfig } = require("vite"); // use `mergeConfig` to recursively merge Vite options;
 
 module.exports = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx|svelte)"],
@@ -15,30 +15,21 @@ module.exports = {
   docs: {
     autodocs: "tag",
   },
-  // For tighter Vite integration
+  /**
+   * A option exposed by storybook-builder-vite for customising the Vite config.
+   * @see https://github.com/eirslett/storybook-builder-vite#customize-vite-config
+   * @param {import("vite").UserConfig} config
+   * @see https://vitejs.dev/config/
+   */
   async viteFinal(config, { configType }) {
-    // return the customized config
+    const { config: userConfig } = await loadConfigFromFile(
+      resolve(__dirname, "../vite.config.ts")
+    );
+
     return mergeConfig(config, {
-      // customize the Vite config here
-      resolve: {
-        alias: {
-          /**
-           * Reminder to ensure aliases are also added here:
-           * 1. .storybook/main.cjs
-           * 2. tsconfig.json
-           * 3. vite.config.ts
-           */
-          "@actions": resolve("./src/actions"),
-          "@assets": resolve("./src/assets"),
-          "@components": resolve("./src/components"),
-          "@stores": resolve("./src/stores"),
-          "@typings": resolve("./src/typings"),
-          "@utils": resolve("./src/utils"),
-          "@styles": resolve("./src/styles"),
-          "@artifacts": resolve("./src/artifacts"),
-          "@contracts": resolve("./src/contracts"),
-        },
-      },
+      ...userConfig,
+      // manually specify plugins to avoid conflict
+      plugins: [],
     });
   },
 };
