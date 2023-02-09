@@ -1,7 +1,6 @@
 <script lang="ts">
   import SunIcon from "@assets/Sun.svelte";
   import MoonIcon from "@assets/Moon.svelte";
-  import { Button } from "@components/button";
 
   function toggleTheme() {
     const isDark = window.document.documentElement.classList.toggle("dark");
@@ -21,8 +20,7 @@
   </script>
 </svelte:head>
 
-<Button
-  size="small"
+<button
   on:click={toggleTheme}
   aria-label="Dark mode"
   type="button"
@@ -30,4 +28,4 @@
 >
   <MoonIcon class="hidden dark:block h-5 w-5" />
   <SunIcon class="dark:hidden h-5 w-5" />
-</Button>
+</button>

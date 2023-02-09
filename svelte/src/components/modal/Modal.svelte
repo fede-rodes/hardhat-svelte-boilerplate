@@ -43,7 +43,7 @@
       <slot name="header" />
     </h3>
     <button
-      class="hover:bg-primary-100 rounded-full p-1"
+      class="hover:bg-secondary-100 rounded-full p-1"
       on:click={handleClose}
     >
       <CloseIcon class="w-6 h-6 text-body" />

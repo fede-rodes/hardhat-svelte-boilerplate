@@ -26,10 +26,10 @@
     <img src={SvelteLogo} class="h-6 sm:h-9" alt="Svelte logo" />
   </a>
 
-  <div class="flex space-x-3">
+  <div class="flex items-center space-x-3">
     <DarkMode />
     {#if account != null}
-      <Button size="small">{shortenAddress(account)}</Button>
+      <span>{shortenAddress(account)}</span>
     {:else}
       <Button size="small" on:click={handleLogin}>Connect wallet</Button>
     {/if}
