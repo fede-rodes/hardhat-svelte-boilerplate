@@ -35,6 +35,16 @@ function createStore() {
     disconnect: () => {
       set(undefined);
     },
+    switchChain: async (chainId: number) => {
+      if (!injected?.isMetaMask) {
+        throw new Error("MetaMask is not installed.");
+      }
+
+      await injected.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: `0x${chainId.toString(16)}` }],
+      });
+    },
   };
 }
 

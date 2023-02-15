@@ -42,6 +42,15 @@
     }
   }
 
+  async function handleSwitch() {
+    try {
+      await wallet.switchChain(chain.chainId);
+    } catch (error) {
+      // TODO
+      console.log(error);
+    }
+  }
+
   onMount(getGreeting);
 </script>
 
@@ -61,11 +70,13 @@
       disabled={!$wallet.isConnected || $wallet.chainId != chain.chainId}
     />
     {#if $wallet.isConnected && $wallet.chainId !== chain.chainId}
-      <Button intent="danger">Wrong network</Button>
+      <Button intent="danger" on:click={handleSwitch}>Wrong network</Button>
     {:else if $wallet.isConnected}
       <Button type="submit" intent="primary" {disabled}>Update greeting</Button>
     {:else}
       <Button intent="primary" on:click={login}>Connect wallet</Button>
     {/if}
   </form>
+  <div class="h-8" />
+  <p class="text-center">Chain: {chain.name}</p>
 </Layout>
