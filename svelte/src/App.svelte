@@ -26,9 +26,7 @@
   }
 
   async function handleSubmit() {
-    if ($wallet.provider == null) {
-      return;
-    }
+    if ($wallet.provider == null) return;
 
     disabled = true;
     error = "";
