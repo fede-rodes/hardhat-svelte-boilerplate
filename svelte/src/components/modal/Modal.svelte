@@ -37,9 +37,7 @@
 >
   <!-- Header -->
   <div class="flex items-center px-6 py-4">
-    <div class="w-6 h-6" />
-
-    <h3 class="flex-1 text-center">
+    <h3 class="flex-1 text-center ml-6">
       <slot name="header" />
     </h3>
 

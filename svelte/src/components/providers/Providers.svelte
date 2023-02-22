@@ -35,16 +35,14 @@
     <li>
       <Button
         fullWidth
-        class="flex items-center space-x-3"
+        class="flex items-center justify-center space-x-3"
         on:click={() => {
           handleConnect(name);
         }}
       >
         <img src={icon} class="h-5" alt={`${name} icon`} />
 
-        <span class="flex-1 text-center">{name}</span>
-
-        <div class="h-5 w-5" />
+        <span class="text-center">{name}</span>
       </Button>
     </li>
   {/each}
