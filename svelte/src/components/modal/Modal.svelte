@@ -32,16 +32,17 @@
 <dialog
   bind:this={dialog}
   use:clickOutsideDialog
-  class="p-0 bg-highlight rounded-lg backdrop:bg-transparent/70"
   on:keydown={handleKeyDown}
   on:outclick={handleClose}
 >
   <!-- Header -->
   <div class="flex items-center px-6 py-4">
     <div class="w-6 h-6" />
-    <h3 class="flex-1 text-base lg:text-xl text-body font-semibold text-center">
+
+    <h3 class="flex-1 text-center">
       <slot name="header" />
     </h3>
+
     <button
       class="hover:bg-secondary-100 rounded-full p-1"
       on:click={handleClose}
@@ -49,7 +50,9 @@
       <CloseIcon class="w-6 h-6 text-body" />
     </button>
   </div>
+
   <Divider />
+
   <!-- Body -->
   <div class="p-6">
     <slot name="body" />

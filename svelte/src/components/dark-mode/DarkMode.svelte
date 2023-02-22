@@ -21,9 +21,9 @@
 </svelte:head>
 
 <button
-  on:click={toggleTheme}
-  aria-label="Dark mode"
   type="button"
+  aria-label="Dark mode"
+  on:click={toggleTheme}
   {...$$restProps}
 >
   <MoonIcon class="hidden dark:block h-5 w-5" />
