@@ -1,7 +1,9 @@
 import { writable } from "svelte/store";
-import { ethers } from "ethers";
 import type { Connexion } from "@/typings/types";
 import { metamask } from "@/stores/metamask";
+
+// TODO
+let ethers: any;
 
 function createStore() {
   const { subscribe, set } = writable<Connexion>({
@@ -15,7 +17,7 @@ function createStore() {
   // Update wallet store state based on MetaMask store changes
   metamask.subscribe(async (data) => {
     // No data present means MetaMask is disconnected
-    if (data == null) {
+    if (ethers == null || data == null) {
       set({
         account: undefined,
         isConnected: false,
@@ -42,6 +44,10 @@ function createStore() {
   return {
     subscribe,
     connect: async (walletName: string): Promise<void> => {
+      // Lazy load ethers
+      if (ethers == null) {
+        ethers = (await import("ethers")).ethers;
+      }
       if (walletName === "MetaMask") {
         return metamask.connect();
       }
