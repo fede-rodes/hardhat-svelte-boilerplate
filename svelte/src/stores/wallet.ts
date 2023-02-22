@@ -1,6 +1,4 @@
 import { writable } from "svelte/store";
-// import type { providers } from "ethers";
-// import { ethers } from "ethers";
 import type { Connexion } from "@/typings/types";
 import { metamask } from "@/stores/metamask";
 
