@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { Greeter } from "@/contracts/greeter";
+  // import { ethers } from "ethers";
+  // import { Greeter } from "@/contracts/greeter";
   import { wallet } from "@/stores/wallet";
   import { Layout } from "@/components/layout";
   import { Button } from "@/components/button";
@@ -8,6 +9,7 @@
 
   // TODO
   let ethers: any;
+  let Greeter: any;
   let greet = "";
   let newGreeting = "";
   let disabled = false;
@@ -29,7 +31,7 @@
   }
 
   async function handleSubmit() {
-    if ($wallet.provider == null) return;
+    if ($wallet.provider == null || Greeter == null) return;
 
     disabled = true;
     error = "";
@@ -61,6 +63,7 @@
   onMount(async () => {
     // Lazy load ethers
     ethers = (await import("ethers")).ethers;
+    Greeter = (await import("@/contracts/greeter")).Greeter;
     await getGreeting();
   });
 </script>
