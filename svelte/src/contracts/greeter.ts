@@ -1,5 +1,5 @@
-import { Contract, providers } from "ethers";
-import type { Signer } from "ethers";
+import { Contract } from "@ethersproject/contracts";
+import type { Signer, providers } from "ethers";
 import * as artifact from "@/artifacts/contracts/Greeter.sol/Greeter.json";
 
 const GREETER_CONTRACT_ADDRESS = import.meta.env.VITE_GREETER_CONTRACT_ADDRESS;

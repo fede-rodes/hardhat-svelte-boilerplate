@@ -20,7 +20,7 @@
     try {
       await wallet.connect(event.detail.walletName);
     } catch (error_: any) {
-      error = error_ || "Something went wrong.";
+      error = error_?.message || "Something went wrong.";
     }
   }
 

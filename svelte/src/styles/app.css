@@ -43,10 +43,7 @@ danger      A color for displaying error messages
 }
 
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+  @apply font-mono text-lg font-normal leading-6;
 
   color-scheme: light dark;
 
@@ -70,4 +67,22 @@ body {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+}
+
+/* Fonts */
+h3 {
+  @apply lg:text-xl text-body font-semibold;
+}
+
+/* Input */
+input {
+  @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+}
+input:disabled {
+  @apply cursor-not-allowed;
+}
+
+/* Dialog */
+dialog {
+  @apply p-0 bg-highlight rounded-lg backdrop:bg-transparent/70;
 }
