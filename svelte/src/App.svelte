@@ -20,8 +20,8 @@
       const greeter = new Greeter(provider);
 
       greet = await greeter.greet_();
-    } catch (_error: any) {
-      error = _error?.message || "Something went wrong when querying greeting";
+    } catch (error_: any) {
+      error = error_?.message || "Something went wrong when querying greeting";
     }
   }
 
@@ -37,9 +37,9 @@
 
       await greeter.setGreeting_(newGreeting);
       await getGreeting();
-    } catch (_error: any) {
+    } catch (error_: any) {
       error =
-        _error?.message || "Something went wrong when setting a new greeting";
+        error_?.message || "Something went wrong when setting a new greeting";
     } finally {
       disabled = false;
     }
@@ -50,8 +50,8 @@
 
     try {
       await wallet.switchChain(chain.chainId);
-    } catch (_error: any) {
-      error = _error?.message || "Something went wrong when switching chains";
+    } catch (error_: any) {
+      error = error_?.message || "Something went wrong when switching chains";
     }
   }
 
