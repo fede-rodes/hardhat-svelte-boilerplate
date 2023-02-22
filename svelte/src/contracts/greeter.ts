@@ -1,4 +1,5 @@
 import { Contract } from "@ethersproject/contracts";
+// import { ethers } from "ethers";
 import type { Signer, providers } from "ethers";
 import * as artifact from "@/artifacts/contracts/Greeter.sol/Greeter.json";
 
