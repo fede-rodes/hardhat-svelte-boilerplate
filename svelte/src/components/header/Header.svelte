@@ -23,7 +23,7 @@
   "
 >
   <a href="/">
-    <img src={SvelteLogo} width={32} height={32} alt="Svelte logo" />
+    <img src={SvelteLogo} width="32" height="32" alt="Svelte logo" />
   </a>
 
   <div class="flex items-center space-x-3">
