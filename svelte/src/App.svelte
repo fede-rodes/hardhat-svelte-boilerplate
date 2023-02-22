@@ -1,21 +1,18 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { ethers } from "ethers";
   import { Greeter } from "@/contracts/greeter";
   import { wallet } from "@/stores/wallet";
   import { Layout } from "@/components/layout";
   import { Button } from "@/components/button";
   import { chain } from "./config";
 
-  // TODO
-  let ethers: any;
   let greet = "";
   let newGreeting = "";
   let disabled = false;
   let error = "";
 
   async function getGreeting() {
-    if (ethers == null) return;
-
     error = "";
 
     try {
@@ -58,10 +55,7 @@
     }
   }
 
-  onMount(async () => {
-    ethers = (await import("ethers")).ethers;
-    await getGreeting();
-  });
+  onMount(getGreeting);
 </script>
 
 <Layout let:login>
