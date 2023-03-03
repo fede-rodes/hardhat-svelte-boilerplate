@@ -1,11 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/svelte";
-import { Modal } from ".";
 import ModalStory from "./Modal.story.svelte";
 
 // More on how to set up stories at: https://storybook.js.org/docs/7.0/svelte/writing-stories/introduction
 const meta = {
   title: "components/Modal",
-  component: Modal,
+  component: ModalStory,
   tags: ["autodocs"],
   // argTypes: {
   //   backgroundColor: { control: "color" },
@@ -14,7 +13,7 @@ const meta = {
   //     options: ["small", "medium", "large"],
   //   },
   // },
-} satisfies Meta<Modal>;
+} satisfies Meta<ModalStory>;
 
 export default meta;
 

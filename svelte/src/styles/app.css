@@ -43,7 +43,7 @@ danger      A color for displaying error messages
 }
 
 :root {
-  @apply font-mono text-lg font-normal leading-6;
+  @apply font-mono text-lg font-normal leading-6 text-body;
 
   color-scheme: light dark;
 

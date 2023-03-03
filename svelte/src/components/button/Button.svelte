@@ -27,7 +27,7 @@
         true: ["w-full"],
       },
       disabled: {
-        true: ["cursor-not-allowed", "bg-primary-100"],
+        true: ["cursor-not-allowed", "bg-secondary-100"],
       },
     },
   });
