@@ -11,7 +11,7 @@ cache
 svelte/*
 !svelte/src/
 svelte/src/*
-!svelte/src/artifacts/
+!svelte/src/*/
 svelte/src/artifacts/*
 !svelte/src/artifacts/contracts
 svelte/src/artifacts/contracts/*
