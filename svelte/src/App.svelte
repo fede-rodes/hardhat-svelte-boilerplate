@@ -5,6 +5,7 @@
   import { wallet } from "@/stores/wallet";
   import { Layout } from "@/components/layout";
   import { Button } from "@/components/button";
+  import { ConnectWalletButton } from "@/components/connect-wallet-button";
   import { chain } from "./config";
 
   // TODO
@@ -68,7 +69,7 @@
   });
 </script>
 
-<Layout let:login>
+<Layout>
   <h3 class="text-center">
     Greeter.sol says: &ldquo;{greet}&rdquo;
   </h3>
@@ -91,7 +92,7 @@
     {:else if $wallet.isConnected}
       <Button type="submit" intent="primary" {disabled}>Update greeting</Button>
     {:else}
-      <Button intent="primary" on:click={login}>Connect wallet</Button>
+      <ConnectWalletButton intent="primary" />
     {/if}
 
     {#if error != null && error.length > 0}

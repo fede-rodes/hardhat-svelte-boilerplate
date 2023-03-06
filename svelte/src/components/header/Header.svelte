@@ -1,17 +1,9 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
+  import { wallet } from "@/stores/wallet";
   import { shortenAddress } from "@/utils/shorten-address";
   import SvelteLogo from "@/assets/Svelte.svg";
   import { DarkMode } from "@/components/dark-mode";
-  import { Button } from "@/components/button";
-
-  export let account: Address | undefined;
-
-  const dispatch = createEventDispatcher();
-
-  function handleLogin() {
-    dispatch("login");
-  }
+  import { ConnectWalletButton } from "@/components/connect-wallet-button";
 </script>
 
 <nav
@@ -23,15 +15,16 @@
   "
 >
   <a href="/">
-    <img src={SvelteLogo} width={32} height={32} alt="Svelte logo" />
+    <img src={SvelteLogo} width="32" height="32" alt="Svelte logo" />
   </a>
 
   <div class="flex items-center space-x-3">
     <DarkMode />
-    {#if account != null}
-      <span>{shortenAddress(account)}</span>
+
+    {#if $wallet.account != null}
+      <span>{shortenAddress($wallet.account)}</span>
     {:else}
-      <Button size="small" on:click={handleLogin}>Connect wallet</Button>
+      <ConnectWalletButton size="small" />
     {/if}
   </div>
 </nav>

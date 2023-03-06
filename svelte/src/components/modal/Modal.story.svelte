@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Button } from "@/components/button";
   import { Modal } from ".";
 
   let isOpen = false;
@@ -11,7 +12,7 @@
   }
 </script>
 
-<button class="text-body" on:click={handleOpen}>Open modal</button>
+<Button intent="primary" on:click={handleOpen}>Open modal</Button>
 
 <Modal {isOpen} on:close={handleClose}>
   <svelte:fragment slot="header">
