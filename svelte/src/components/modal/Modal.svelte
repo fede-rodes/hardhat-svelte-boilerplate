@@ -41,10 +41,7 @@
       <slot name="header" />
     </h3>
 
-    <button
-      class="hover:bg-secondary-100 rounded-full p-1"
-      on:click={handleClose}
-    >
+    <button class="hover:bg-secondary-100 rounded-full" on:click={handleClose}>
       <CloseIcon class="w-6 h-6 text-body" />
     </button>
   </div>
@@ -52,7 +49,7 @@
   <Divider />
 
   <!-- Body -->
-  <div class="p-6">
+  <div class="px-6 py-4">
     <slot name="body" />
   </div>
 </dialog>
