@@ -21,10 +21,10 @@
   <div class="flex items-center space-x-3">
     <DarkMode />
 
-    {#if $wallet.account != null}
-      <span>{shortenAddress($wallet.account)}</span>
-    {:else}
+    {#if $wallet.account == null}
       <ConnectWalletButton size="small" />
+    {:else}
+      <span>{shortenAddress($wallet.account)}</span>
     {/if}
   </div>
 </nav>

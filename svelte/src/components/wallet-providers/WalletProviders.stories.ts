@@ -28,12 +28,12 @@ export const Default: Story = {
   args: {},
 };
 
-export const Error: Story = {
+export const Disabled: Story = {
   render: (args) => ({
     Component: WalletProviders,
     props: args,
   }),
   args: {
-    error: "Something went wrong.",
+    disabled: true,
   },
 };

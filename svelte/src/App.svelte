@@ -82,7 +82,7 @@
       type="text"
       id="greeting"
       bind:value={newGreeting}
-      placeholder="Add a new greeting..."
+      placeholder="Enter a new greeting..."
       required
       disabled={!$wallet.isConnected || $wallet.chainId != chain.chainId}
     />

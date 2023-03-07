@@ -26,6 +26,6 @@
   on:click={toggleTheme}
   {...$$restProps}
 >
-  <MoonIcon class="hidden dark:block h-5 w-5" />
-  <SunIcon class="dark:hidden h-5 w-5" />
+  <MoonIcon class="dark:hidden h-5 w-5" />
+  <SunIcon class="hidden dark:block h-5 w-5" />
 </button>
