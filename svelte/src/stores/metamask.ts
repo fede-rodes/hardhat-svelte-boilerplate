@@ -1,41 +1,38 @@
 import { writable } from "svelte/store";
 import type { ExternalProvider } from "@ethersproject/providers";
 
-export type Data = {
-  account: Address;
-  injected: ExternalProvider;
-};
-
 const injected = window.ethereum;
 
 // https://docs.metamask.io/guide/ethereum-provider.html#using-the-provider
 function createStore() {
-  const { subscribe, set } = writable<undefined | Data>();
+  const { subscribe, set } = writable<
+    { injected: ExternalProvider; account: Address } | undefined
+  >();
 
   return {
     subscribe,
-    connect: async () => {
+    connect: async function (): Promise<void> {
       if (!injected?.isMetaMask) {
         throw new Error("MetaMask is not installed.");
       }
 
-      const accounts = <Address[]>await injected.request({
+      const accounts = (await injected.request({
         method: "eth_requestAccounts",
-      });
+      })) as Address[];
 
       if (accounts.length === 0) {
         throw new Error("No accounts found.");
       }
 
       set({
-        account: accounts[0],
         injected,
+        account: accounts[0],
       });
     },
-    disconnect: () => {
+    disconnect: function () {
       set(undefined);
     },
-    switchChain: async (chainId: number) => {
+    switchChain: async function (chainId: number): Promise<void> {
       if (!injected?.isMetaMask) {
         throw new Error("MetaMask is not installed.");
       }
@@ -60,7 +57,7 @@ if (injected?.isMetaMask) {
   //   metamask.connect();
   // }
 
-  // Disconnect on accounts or network change
+  // Reconnect on accounts or network change
   injected.on("accountsChanged", metamask.connect);
   injected.on("chainChanged", metamask.connect);
   injected.on("disconnect", metamask.disconnect);

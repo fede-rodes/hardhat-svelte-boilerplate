@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { WalletId } from "@/typings/types";
   import { wallet } from "@/stores/wallet";
   import { walletModal } from "@/stores/wallet-modal";
   import { Modal } from "@/components/modal";
@@ -10,14 +11,18 @@
     walletModal.close();
     error = undefined;
   }
+
   async function handleConnect(event: CustomEvent) {
     error = undefined;
+
     try {
-      await wallet.connect(event.detail.walletName);
+      await wallet.connect(event.detail.walletId as WalletId);
     } catch (error_: any) {
-      error = error_?.message || "Something went wrong.";
+      error = error_?.message || "Unknown error occurred.";
     }
   }
+
+  $: error = $wallet.error;
 
   $: {
     if ($wallet.isConnected) {
@@ -34,7 +39,7 @@
     </p>
 
     <div class="my-4">
-      <WalletProviders on:connect={handleConnect} />
+      <WalletProviders disabled={$wallet.loading} on:connect={handleConnect} />
     </div>
 
     {#if error != null}
