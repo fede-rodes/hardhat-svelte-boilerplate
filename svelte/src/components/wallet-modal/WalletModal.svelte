@@ -38,7 +38,7 @@
       Connect with one of our available wallet providers.
     </p>
 
-    <div class="my-4">
+    <div class="flex flex-col space-y-3 my-4">
       <WalletProviders disabled={$wallet.loading} on:connect={handleConnect} />
     </div>
 
