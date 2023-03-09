@@ -29,21 +29,17 @@
   }
 </script>
 
-<ul class="space-y-3">
-  {#each WALLET_PROVIDERS as { id, label, icon }}
-    <li>
-      <Button
-        fullWidth
-        {disabled}
-        class="flex items-center justify-center space-x-3"
-        on:click={() => {
-          handleConnect(id);
-        }}
-      >
-        <img src={icon} class="h-5" alt={`${label} icon`} />
+{#each WALLET_PROVIDERS as { id, label, icon }}
+  <Button
+    fullWidth
+    {disabled}
+    class="flex items-center justify-center space-x-3"
+    on:click={() => {
+      handleConnect(id);
+    }}
+  >
+    <img src={icon} class="h-5" alt={`${label} icon`} />
 
-        <span class="text-center">{label}</span>
-      </Button>
-    </li>
-  {/each}
-</ul>
+    <span class="text-center">{label}</span>
+  </Button>
+{/each}
